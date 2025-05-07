@@ -18,33 +18,33 @@
         }
         
         * {
-            box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho total do elemento */
+            box-sizing: border-box; 
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif; /* Fonte padrão */
+            font-family: Arial, sans-serif; 
         }
         
         body {
-            background-color: #f9f9f9; /* Cor de fundo da página */
+            background-color: #f9f9f9; 
             color: var(--text-color);
             display: flex;
-            justify-content: center; /* Centraliza o conteúdo na página */
-            padding: 20px; /* Espaçamento ao redor do corpo da página */
+            justify-content: center; 
+            padding: 20px; 
         }
         
         .container {
-            background-color: white; /* Cor de fundo do contêiner do formulário */
+            background-color: white; 
             width: 100%;
-            max-width: var(--form-width); /* Largura máxima do formulário */
-            padding: 20px; /* Espaçamento interno do contêiner */
-            border: 1px solid var(--border-color); /* Borda do contêiner */
-            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Sombra suave */
+            max-width: var(--form-width); 
+            padding: 20px; 
+            border: 1px solid var(--border-color); 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); 
         }
         
         .header {
             text-align: center;
             margin-bottom: 20px;
-            border-bottom: 2px solid var(--primary-color); /* Linha azul abaixo do cabeçalho */
+            border-bottom: 2px solid var(--primary-color); 
             padding-bottom: 15px;
         }
         
@@ -52,7 +52,7 @@
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 5px;
-            text-transform: uppercase; /* Texto em maiúsculas */
+            text-transform: uppercase; 
         }
         
         .subtitle {
@@ -67,7 +67,7 @@
             font-weight: bold;
             text-align: center;
             margin: 20px 0;
-            text-decoration: underline; /* Sublinhado no título do formulário */
+            text-decoration: underline; 
         }
         
         .intro-text {
@@ -76,64 +76,101 @@
         }
         
         .form-section {
-            margin-bottom: 20px; /* Espaçamento entre seções do formulário */
+            margin-bottom: 20px; 
         }
         
         .form-group {
-            margin-bottom: 15px; /* Espaçamento entre grupos de campos */
+            margin-bottom: 15px; 
         }
         
         label {
-            display: block; /* Faz o label ocupar a linha inteira */
+            display: block; 
             margin-bottom: 5px;
             font-weight: bold;
             font-size: 14px;
         }
         
         input, select, textarea {
-            width: 100%; /* Campos ocupam 100% da largura disponível */
+            width: 100%; 
             padding: 8px;
             border: 1px solid var(--border-color);
-            border-radius: 4px; /* Bordas arredondadas */
+            border-radius: 4px; 
             font-size: 14px;
         }
         
         input {
-            height: 38px; /* Altura padrão para campos de input */
+            height: 38px; 
         }
         
         textarea {
-            min-height: 150px; /* Altura mínima para o campo de texto longo */
-            resize: vertical; /* Permite redimensionamento vertical */
+            min-height: 150px; 
+            resize: vertical; 
         }
         
         .form-row {
-            display: flex; /* Permite que os campos fiquem em linha */
-            flex-wrap: wrap; /* Quebra a linha se não houver espaço */
-            margin: 0 -10px; /* Compensa o padding dos .form-col */
+            display: flex; 
+            flex-wrap: wrap; 
+            margin: 0 -10px; 
         }
         
         .form-col {
-            flex: 1; /* Distribui o espaço igualmente entre as colunas */
-            padding: 0 10px; /* Espaçamento lateral para as colunas */
-            min-width: 200px; /* Largura mínima para colunas */
+            flex: 1; 
+            padding: 0 10px; 
+            min-width: 200px; 
         }
         
         .form-col-small {
-            flex: 0 0 150px; /* Largura fixa para colunas menores */
+            flex: 0 0 150px; 
             padding: 0 10px;
         }
         
         .form-col-xsmall {
-            flex: 0 0 120px; /* Largura fixa para colunas muito pequenas */
+            flex: 0 0 120px; 
             padding: 0 10px;
         }
         
         .section-title {
             font-weight: bold;
             margin-bottom: 10px;
-            border-bottom: 1px solid var(--border-color); /* Linha abaixo do título da seção */
+            border-bottom: 1px solid var(--border-color); 
             padding-bottom: 5px;
+        }
+
+        /* Estilo para a lista de documentos necessários */
+        #documentosNecessariosContainer {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        #documentosNecessariosContainer h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: var(--primary-color);
+        }
+        #documentosNecessariosList ul {
+            list-style-type: none; /* Remove marcadores padrão */
+            padding-left: 0;
+        }
+        #documentosNecessariosList li {
+            padding: 5px 0 5px 25px; /* Espaço para o ícone */
+            position: relative;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        #documentosNecessariosList li::before {
+            content: "✓"; /* Ícone de check */
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 5px; 
+        }
+        .no-documents-message {
+            font-style: italic;
+            color: #777;
         }
         
         .footer {
@@ -142,20 +179,20 @@
         }
         
         .date-field {
-            text-align: right; /* Alinha a data à direita */
+            text-align: right; 
             margin: 20px 0;
         }
         
         .signature-field {
-            border-top: 1px solid var(--border-color); /* Linha acima do campo de assinatura */
+            border-top: 1px solid var(--border-color); 
             margin-top: 50px;
             padding-top: 5px;
             text-align: center;
         }
         
         .btn {
-            background-color: var(--primary-color); /* Cor de fundo do botão */
-            color: white; /* Cor do texto do botão */
+            background-color: var(--primary-color); 
+            color: white; 
             padding: 10px 15px;
             border: none;
             border-radius: 4px;
@@ -165,31 +202,27 @@
         }
         
         .btn:hover {
-            background-color: #005091; /* Cor do botão ao passar o mouse */
+            background-color: #005091; 
         }
         
-        /* Estilos para impressão */
         @media print {
             body {
                 background-color: white;
                 padding: 0;
             }
-            
             .container {
                 box-shadow: none;
                 border: none;
                 padding: 0;
             }
-            
-            .btn {
-                display: none; /* Esconde o botão ao imprimir */
+            .btn, #documentosNecessariosContainer { /* Esconde a lista de docs ao imprimir */
+                display: none; 
             }
         }
         
-        /* Estilos para telas menores (responsividade) */
         @media (max-width: 768px) {
             .form-col, .form-col-small, .form-col-xsmall {
-                flex: 0 0 100%; /* Colunas ocupam 100% da largura em telas pequenas */
+                flex: 0 0 100%; 
                 margin-bottom: 10px;
             }
         }
@@ -233,6 +266,12 @@
                     <option value="Revisão de Área do Alvará ou da Publicidade">Revisão de Área do Alvará ou da Publicidade</option>
                     <option value="Suspensão de Atividade Econômica">Suspensão de Atividade Econômica</option>
                 </select>
+            </div>
+
+            <div class="form-group" id="documentosNecessariosContainer" style="display: none;">
+                <h4>Documentos Necessários:</h4>
+                <div id="documentosNecessariosList">
+                    </div>
             </div>
             
             <div class="form-section">
@@ -309,8 +348,9 @@
             </div>
             
             <div class="form-section">
+                <div class="section-title">2. O sujeito passivo acima identificado vem requerer:</div>
                 <div class="form-group">
-                    <textarea id="objetoPedido" name="objetoPedido" placeholder="Descreva de forma legível o objeto do pedido, com a devida motivação e quaisquer outras razões que achar necessários à análise do pleito (aperte enter para parágrafo)" required style="white-space: pre-wrap; overflow-wrap: break-word; word-wrap: break-word; min-height: 200px; font-size: 14px; line-height: 1.5;"></textarea>
+                    <textarea id="objetoPedido" name="objetoPedido" placeholder="Descreva de forma legível o objeto do pedido, com a devida motivação e quaisquer outras razões que achar necessários à análise do pleito" required style="white-space: pre-wrap; overflow-wrap: break-word; word-wrap: break-word; min-height: 200px; font-size: 14px; line-height: 1.5;"></textarea>
                 </div>
             </div>
             
@@ -324,7 +364,8 @@
                 
                 <div class="signature-field">
                     <p>Sujeito passivo/Requerente (inclusive assinatura eletrônica) <a href="https://www.gov.br/pt-br/servicos/assinatura-eletronica" target="_blank" style="color: var(--primary-color); font-weight: bold;">Clique Aqui</a> e assine pelo Gov.br</p>
-                    <div id="signatureSpace" style="height: 60px;"></div> <div class="form-group" style="max-width: 300px; margin: 0 auto;">
+                    <div id="signatureSpace" style="height: 60px;"></div> 
+                    <div class="form-group" style="max-width: 300px; margin: 0 auto;">
                         <label for="cpfAssinatura">CPF nº</label>
                         <input type="text" id="cpfAssinatura" name="cpfAssinatura" placeholder="000.000.000-00" required>
                     </div>
@@ -336,37 +377,299 @@
     </div>
     
     <script>
-        // Função para formatar a data atual no formato "Porto Velho, DD de Mês de AAAA"
+        // Função para formatar a data atual
         function formatarData() {
             const meses = [
                 'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
                 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
             ];
-            
             const dataAtual = new Date();
             const dia = dataAtual.getDate();
-            const mes = meses[dataAtual.getMonth()]; // Pega o nome do mês
+            const mes = meses[dataAtual.getMonth()];
             const ano = dataAtual.getFullYear();
-            
             return `Porto Velho, ${dia} de ${mes} de ${ano}`;
         }
-        
-        // Atualiza o campo de data no formulário assim que a página carrega
         document.getElementById('dataAtual').textContent = formatarData();
+
+        // --- INÍCIO: Lógica para exibir documentos necessários ---
+        const documentosPorTipo = {
+            "Alteração Cadastral Econômica": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Para autônomo, documento comprobatório objeto da alteração",
+                "Para sociedade civil, contrato social e consolidado"
+            ],
+            "Atualização de Cadastro de Imóvel": [ // Corresponde a "ALTERAÇÃO CADASTRAL IMÓVEL" nos PDFs
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço do requerente",
+                "Comprovante de endereço do imóvel objeto do pedido",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Certidão de Inteiro teor atualizada; no caso de área registrada",
+                "Contrato de compra e venda, quando for o caso",
+                "Carnê do IPTU ou Informar o número da inscrição imobiliária",
+                "Informar no requerimento qual e quando ocorreu alteração no imóvel",
+                "Informar o número da inscrição imobiliária, se não houver carnê do IPTU"
+            ],
+            "Baixa de Inscrição Fiscal": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Para sociedade civil: distrato social, comprovante baixa do CNPJ",
+                "Para profissional autônomo: contrato de trabalho, posse em concurso público e qualquer documento que comprove a cessação de prestação de serviço autônomo"
+            ],
+            "Cancelamento de Dívida": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Anexar documentação comprobatória",
+                "Informar qual tipo de dívida, o ano, o valor e os motivos do cancelamento"
+            ],
+            "Certidão Informativa": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo e de certidão de qualquer natureza, com o comprovante original",
+                "Informar no requerimento se deseja certidão de cadastro ou de baixa fiscal"
+            ],
+            "Dedução Obra ISS": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Cópia do contrato de prestação de serviço",
+                "Planilha de custo - BDI",
+                "Medição da obra objeto do pedido",
+                "Notas de mercadorias",
+                "Notas de remessa de materiais",
+                "NFS-e já emitidas (somente se já emitiu NFS-e para a obra objeto do pedido)"
+            ],
+            "Denúncia Espontânea do ISSQN": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "DAM avulso (online) de denúncia espontânea do ISSQN, se houver valor denunciado",
+                "Comprovante de pagamento do DAM avulso do ISSQN, se for o caso",
+                "Redigir no requerimento ou em documento apartado toda a descrição dos fatos e das infrações que ensejaram a denúncia espontânea, as competências, os prazos, os valores, os cálculos de juros e multas conforme o Art. 87-A da LC 369/09"
+            ],
+            "Imunidade Autarquia e Fundação": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço da entidade",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Lei dispondo sobre a criação do órgão",
+                "Regimento interno",
+                "Decreto ou portaria de nomeação do representante",
+                "Comprovante de inscrição no CNPJ",
+                "Certidão de Inteiro Teor atualizada e dentro do prazo de validade em nome do requerente, ou contrato de compra e venda ou instrumento afim, nos casos em que a Certidão de Inteiro Teor não conste o nome do requerente, mas conste o nome do vendedor, para fins de concessão de ITBI",
+                "Informar o número de inscrição imobiliária do imóvel objeto da imunidade, ou anexar o último carnê do IPTU"
+            ],
+            "Imunidade Entes Governamentais": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Lei dispondo sobre a criação do órgão",
+                "Decreto ou portaria de nomeação do representante",
+                "Comprovante de inscrição no CNPJ",
+                "Certidão de Inteiro Teor atualizada e dentro do prazo de validade em nome do requerente, ou contrato de compra e venda ou instrumento afim, nos casos em que a Certidão de Inteiro Teor não conste o nome do requerente, mas conste o nome do vendedor, para fins de concessão de ITBI",
+                "Informar o número de inscrição imobiliária do imóvel objeto da imunidade, ou anexar o último carnê do IPTU"
+            ],
+            "Imunidade Entidade Educação e Assistência Social": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Atestado de registro no Conselho Nacional de Assistência Social (CNAS) ou certificado de entidade de fins filantrópicos expedido pelo CNAS (no caso de entidade de assistência social)",
+                "Registro no Ministério da Educação ou na Secretaria Estadual da Educação (no caso de entidade de educação)",
+                "Atos constitutivos",
+                "Comprovante de inscrição no CNPJ",
+                "Certidão de Inteiro Teor atualizada e dentro do prazo de validade em nome do requerente, ou contrato de compra e venda ou instrumento afim, nos casos em que a Certidão de Inteiro Teor não conste o nome do requerente, mas conste o nome do vendedor, para fins de concessão de ITBI",
+                "Informar o número de inscrição imobiliária do imóvel objeto da imunidade, ou anexar o último carnê do IPTU"
+            ],
+            "Imunidade Entidade Sindical de Trabalhadores": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Regimento interno",
+                "Comprovante de inscrição no CNPJ",
+                "Certidão de Inteiro Teor atualizada e dentro do prazo de validade em nome do requerente, ou contrato de compra e venda ou instrumento afim, nos casos em que a Certidão de Inteiro Teor não conste o nome do requerente, mas conste o nome do vendedor, para fins de concessão de ITBI",
+                "Informar o número de inscrição imobiliária do imóvel objeto da imunidade, se não houver carnê do IPTU"
+            ],
+            "Imunidade Partido Político": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Lei federal dispondo sobre sua criação",
+                "Registro no Tribunal Superior Eleitoral",
+                "Regimento interno",
+                "Comprovante de inscrição no CNPJ",
+                "Certidão de Inteiro Teor atualizada e dentro do prazo de validade em nome do requerente, ou contrato de compra e venda ou instrumento afim, nos casos em que a Certidão de Inteiro Teor não conste o nome do requerente, mas conste o nome do vendedor, para fins de concessão de ITBI",
+                "Informar o número de inscrição imobiliária do imóvel objeto da imunidade, ou anexar o último carnê do IPTU"
+            ],
+            "Imunidade Templo de Qualquer Culto": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF do requerente e seu procurador, se for o caso",
+                "Cópia do Comprovante de endereço do requerente",
+                "Confirmar e-mail e telefones de contato no requerimento. Adicionar outros meios de contato no campo observação, se necessário",
+                "Taxa de abertura de processo, com o comprovante de pagamento original",
+                "Estatuto ou Regimento interno",
+                "Ata de Criação da entidade",
+                "Ata da última diretoria eleita",
+                "Comprovante de inscrição no CNPJ",
+                "Ata de Filiação de Unidades Religiosas (somente para situações em que um único CNPJ, esteja sendo utilizado para representar várias unidades pertencentes à mesma organização religiosa)",
+                "Certidão de Inteiro Teor atualizada e dentro do prazo de validade em nome do requerente, ou contrato de compra e venda ou instrumento afim, nos casos em que a Certidão de Inteiro Teor não conste o nome do requerente, mas conste o nome do vendedor, para fins de concessão de ITBI",
+                "Informar o número de inscrição imobiliária do imóvel objeto da imunidade, ou anexar o último carnê do IPTU"
+            ],
+            "Inexigibilidade de Licença de Funcionamento": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Último Alvará",
+                "Cartão do CNPJ",
+                "Última alteração contratual, se for empresa",
+                "Informar qual norma garante o direito à inexigibilidade de licença de funcionamento"
+            ],
+            "Isenção IPTU Ex-Soldado da Borracha ou Viúva": [ // Corresponde a "ISENÇÃO IPTU EX SOLDADO BORRACHA"
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Carta de concessão do benefício, expedida pelo INSS ou justificação expedida pelo Ministério Público",
+                "Certidão de óbito (no caso de cônjuge sobrevivente)", // Removida a duplicata, assumindo que era um erro de digitação no PDF.
+                "Informar o número de inscrição imobiliária do imóvel objeto da isenção, se não houver carnê do IPTU"
+            ],
+            "Isenção IPTU Ferroviário EFMM": [ // Corresponde a "ISENÇÃO IPTU FERROVIÁRIO APOSENTADO DA EFMM"
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Certidão fornecida pelo Ministério dos Transportes ou Carteira de Trabalho e Previdência Social ou documento de identificação de entidade classista",
+                "Certidão de óbito (no caso de cônjuge sobrevivente)", // Removida a duplicata.
+                "Informar o número de inscrição imobiliária do imóvel objeto da isenção, se não houver carnê do IPTU"
+            ],
+            "Isenção IPTU/TRSD Bolsa Família": [ // Corresponde a "ISENÇÃO IPTU E TAXA DE LIXO PARA BENEFICIÁRIO DO BOLSA FAMÍLIA"
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Informar e-mail e telefones de contato",
+                "Carnê de IPTU e TRSD, ou, 2ª via do Documento de Arrecadação Municipal (DAM) do exercício em que solicita a isenção",
+                "Contrato de compra e Venda do Imóvel (se o imóvel for próprio), ou de aluguel (se for alugado) ou de Cessão ou Direito de Uso (se for cedido) - documentos exigidos para situações em que o imóvel não esteja em nome do beneficiário do Programa Bolsa Família",
+                "Certidão de Casamento ou Declaração de União Estável para situações em que o imóvel está em nome de um cônjuge e o benefício está em nome do outro cônjuge",
+                "Relatório analítico de domicílios e pessoas cadastradas, incluindo o Número da Identificação Social (NIS), Nome do beneficiário, Situação Cadastral, e Renda per capta a ser juntado pela SEMAS",
+                "Relatório Analítico do Sistema de Benefícios Cidadão (SIBEC) a ser juntado pela SEMAS",
+                "Despacho emitido pelas SEMAS se faz jus ou não benefício"
+            ],
+            "Prescrição Tributária": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Para imóvel, cópia do contrato de compra e venda, caso o IPTU/TRSD não esteja no nome do proprietário",
+                "Informar no requerimento os tributos e os respectivos anos a prescrever da mesma inscrição"
+            ],
+            "Revalidação de Certificado Imunidade": [ // Corresponde a "REVALIDAÇÃO DE CERTIFICADO DE IMUNIDADE"
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Certificado Declaratório de Imunidade a ser revalidado (original ou cópia)"
+            ],
+            "Revisão de Área do Alvará ou da Publicidade": [ // Corresponde a "REVISÃO AREA DE ALVARÁ OU DE PUBLICIDADE"
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Anexar o Alvará original, se houver",
+                "Anexar foto, croqui, e qualquer documento que comprove o tamanho da área correta",
+                "Informar o número de ROP na solicitação, se alvará em processo de licenciamento",
+                "Descrever no requerimento o motivo da revisão, inclusive se houve erro na declaração de metragem pela REDESIM, comprovando a área correta com croqui, foto, mapa etc.",
+                "Informar no requerimento o horário para vistoria"
+            ],
+            "Suspensão de Atividade Econômica": [
+                "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
+                "Cópia de RG e CPF, do requerente",
+                "Comprovante de endereço",
+                "Informar e-mail e telefones de contato",
+                "Taxa de abertura de processo, com o comprovante original",
+                "Comprovante de suspensão da JUCER, para empresas",
+                "Comprovante de suspensão do CNPJ, para pessoas jurídicas",
+                "Comprovante pagamento ISS do mês do pedido, para autônomo e sociedade de profissionais",
+                "Informar no requerimento os motivos da suspensão"
+            ]
+        };
+
+        const selectTipoRequerimento = document.getElementById('tipoRequerimento');
+        const documentosContainer = document.getElementById('documentosNecessariosContainer');
+        const documentosListDiv = document.getElementById('documentosNecessariosList');
+
+        selectTipoRequerimento.addEventListener('change', function() {
+            const tipoSelecionado = this.value;
+            documentosListDiv.innerHTML = ''; // Limpa a lista anterior
+
+            if (tipoSelecionado && documentosPorTipo[tipoSelecionado]) {
+                const documentos = documentosPorTipo[tipoSelecionado];
+                if (documentos.length > 0) {
+                    const ul = document.createElement('ul');
+                    documentos.forEach(doc => {
+                        const li = document.createElement('li');
+                        li.textContent = doc;
+                        ul.appendChild(li);
+                    });
+                    documentosListDiv.appendChild(ul);
+                } else {
+                    documentosListDiv.innerHTML = '<p class="no-documents-message">Nenhum documento obrigatório cadastrado para este tipo de requerimento.</p>';
+                }
+                documentosContainer.style.display = 'block'; // Mostra o container
+            } else if (tipoSelecionado) {
+                 documentosListDiv.innerHTML = '<p class="no-documents-message">Nenhum documento obrigatório cadastrado para este tipo de requerimento.</p>';
+                 documentosContainer.style.display = 'block'; // Mostra o container com a mensagem
+            }
+            else {
+                documentosContainer.style.display = 'none'; // Esconde o container se nada estiver selecionado
+            }
+        });
+        // --- FIM: Lógica para exibir documentos necessários ---
         
-        // Adiciona o listener de evento ao botão "Gerar PDF"
+        // Função para gerar o PDF
         document.getElementById('gerarPdf').addEventListener('click', function() {
-            // Validação simples: verifica se todos os campos obrigatórios estão preenchidos
             const form = document.getElementById('semfazForm');
             const allInputs = form.querySelectorAll('input[required], select[required], textarea[required]');
             let isValid = true;
             
             allInputs.forEach(input => {
-                if (!input.value.trim()) { // Verifica se o valor (após remover espaços) está vazio
-                    input.style.borderColor = 'red'; // Destaca campos não preenchidos
+                if (!input.value.trim()) { 
+                    input.style.borderColor = 'red'; 
                     isValid = false;
                 } else {
-                    input.style.borderColor = '#ccc'; // Restaura a borda normal
+                    input.style.borderColor = '#ccc'; 
                 }
             });
             
@@ -409,37 +712,34 @@
             const pageWidth = doc.internal.pageSize.getWidth();
             const pageHeight = doc.internal.pageSize.getHeight();
             const contentWidth = pageWidth - (2 * pageMargin);
-            const lineHeightFactor = 1.2; // Fator para espaçamento entre linhas
-            const pointsToMm = 0.352778; // Conversão de pontos (tamanho da fonte) para mm
+            const lineHeightFactor = 1.2; 
+            const pointsToMm = 0.352778; 
 
             let currentY = pageMargin + 10; 
 
-            // Função auxiliar para adicionar nova página se necessário
             function ensurePageSpace(requiredHeight) {
                 if (currentY + requiredHeight > pageHeight - pageMargin) {
                     doc.addPage();
-                    currentY = pageMargin + 10; // Reinicia Y na nova página
+                    currentY = pageMargin + 10; 
                 }
             }
 
-            // Função para obter altura estimada de um texto multilinhas
             function getTextHeight(text, maxWidth, fontSize) {
-                doc.setFontSize(fontSize); // Define o tamanho da fonte para cálculo
+                doc.setFontSize(fontSize); 
                 const lines = doc.splitTextToSize(text, maxWidth);
                 return lines.length * fontSize * pointsToMm * lineHeightFactor;
             }
             
-            // Adicionar cabeçalho do PDF
             doc.setFontSize(14);
             doc.setFont(undefined, 'bold'); 
             doc.text('PREFEITURA DO MUNICÍPIO DE PORTO VELHO', pageWidth / 2, currentY, { align: 'center' });
-            currentY += 6; // Ajuste de espaçamento
+            currentY += 6; 
             doc.setFontSize(12);
             doc.text('SECRETARIA MUNICIPAL DE FAZENDA', pageWidth / 2, currentY, { align: 'center' });
-            currentY += 6; // Ajuste de espaçamento
+            currentY += 6; 
             doc.setFontSize(16);
             doc.text('REQUERIMENTO', pageWidth / 2, currentY, { align: 'center' });
-            currentY += 6; // Espaço antes da linha
+            currentY += 6; 
             doc.setFont(undefined, 'normal'); 
             
             doc.setDrawColor(0, 105, 180); 
@@ -447,7 +747,6 @@
             doc.line(pageMargin, currentY, pageWidth - pageMargin, currentY);
             currentY += 10; 
             
-            // Texto introdutório
             const introText = 'Ilmo. Sr. (a) Secretário (a) Municipal de Fazenda (SEMFAZ), trata-se de:';
             const introTextHeight = getTextHeight(introText, contentWidth, 11);
             ensurePageSpace(introTextHeight + 2);
@@ -455,133 +754,115 @@
             doc.text(introText, pageMargin, currentY);
             currentY += introTextHeight + 2;
             
-            // Tipo de requerimento
-            const tipoRequerimento = document.getElementById('tipoRequerimento').value;
-            const tipoRequerimentoHeight = getTextHeight(tipoRequerimento, contentWidth, 12);
+            const tipoRequerimentoVal = document.getElementById('tipoRequerimento').value;
+            const tipoRequerimentoHeight = getTextHeight(tipoRequerimentoVal, contentWidth, 12);
             ensurePageSpace(tipoRequerimentoHeight + 4);
             doc.setFontSize(12);
             doc.setFont(undefined, 'bold');
-            doc.text(tipoRequerimento, pageMargin, currentY, {maxWidth: contentWidth});
+            doc.text(tipoRequerimentoVal, pageMargin, currentY, {maxWidth: contentWidth});
             currentY += tipoRequerimentoHeight + 4;
             doc.setFont(undefined, 'normal');
 
-            // Seção 1: Identificação
             const secao1Titulo = '1. Identificação do sujeito passivo/Requerente';
             const secao1TituloHeight = getTextHeight(secao1Titulo, contentWidth, 12);
-            ensurePageSpace(secao1TituloHeight + 3); // Aumentado o espaço após o título
+            ensurePageSpace(secao1TituloHeight + 3); 
             doc.setFontSize(12);
             doc.setFont(undefined, 'bold');
             doc.text(secao1Titulo, pageMargin, currentY);
-            currentY += secao1TituloHeight + 3; // Aumentado o espaço após o título
+            currentY += secao1TituloHeight + 3; 
             doc.setFont(undefined, 'normal');
             doc.setFontSize(10);
 
             let fieldText;
             let fieldHeight;
-            const fieldSpacing = 2; // Espaçamento entre os campos da Seção 1
+            const fieldSpacing = 2; 
 
-            // Nome/Razão social
             fieldText = 'Nome/Razão social: ' + document.getElementById('nomeRazao').value;
             fieldHeight = getTextHeight(fieldText, contentWidth, 10);
             ensurePageSpace(fieldHeight + fieldSpacing);
             doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
             currentY += fieldHeight + fieldSpacing;
 
-            // CPF/CNPJ
             fieldText = 'CPF/CNPJ: ' + document.getElementById('cpfCnpj').value;
             fieldHeight = getTextHeight(fieldText, contentWidth, 10);
             ensurePageSpace(fieldHeight + fieldSpacing);
             doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
             currentY += fieldHeight + fieldSpacing;
             
-            // Telefone/Celular
             fieldText = 'Telefone/Celular: ' + document.getElementById('telefone').value;
             fieldHeight = getTextHeight(fieldText, contentWidth, 10);
             ensurePageSpace(fieldHeight + fieldSpacing);
             doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
             currentY += fieldHeight + fieldSpacing;
 
-            // E-mail
             fieldText = 'E-mail: ' + document.getElementById('email').value;
             fieldHeight = getTextHeight(fieldText, contentWidth, 10);
             ensurePageSpace(fieldHeight + fieldSpacing);
             doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
             currentY += fieldHeight + fieldSpacing;
             
-            // Endereço de Correspondência
             fieldText = 'Endereço de Correspondência: ' + document.getElementById('logradouro').value;
             fieldHeight = getTextHeight(fieldText, contentWidth, 10);
             ensurePageSpace(fieldHeight + fieldSpacing);
             doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
             currentY += fieldHeight + fieldSpacing;
 
-            // Nº
             fieldText = 'Nº: ' + document.getElementById('numero').value;
             fieldHeight = getTextHeight(fieldText, contentWidth, 10);
             ensurePageSpace(fieldHeight + fieldSpacing);
             doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
             currentY += fieldHeight + fieldSpacing;
 
-            // Bairro
             fieldText = 'Bairro: ' + document.getElementById('bairro').value;
             fieldHeight = getTextHeight(fieldText, contentWidth, 10);
             ensurePageSpace(fieldHeight + fieldSpacing);
             doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
             currentY += fieldHeight + fieldSpacing;
 
-            // CEP
             fieldText = 'CEP: ' + document.getElementById('cep').value;
             fieldHeight = getTextHeight(fieldText, contentWidth, 10);
             ensurePageSpace(fieldHeight + fieldSpacing);
             doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
             currentY += fieldHeight + fieldSpacing;
 
-            // Complemento
             fieldText = 'Complemento: ' + document.getElementById('complemento').value;
             fieldHeight = getTextHeight(fieldText, contentWidth, 10);
-            ensurePageSpace(fieldHeight + 4); // Espaço maior antes da próxima seção
+            ensurePageSpace(fieldHeight + 4); 
             doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
             currentY += fieldHeight + 4;
 
-
-            // --- SEÇÃO 2: Objeto do Pedido ---
             const secao2Titulo = '2. O sujeito passivo acima identificado vem requerer:';
             const objetoPedidoValue = document.getElementById('objetoPedido').value.trim();
             
-            doc.setFontSize(10); // Fonte para o texto do objetoPedido
-            const linesObjetoPedido = doc.splitTextToSize(objetoPedidoValue, contentWidth - 4); // -4 para padding da caixa (2mm de cada lado)
+            doc.setFontSize(10); 
+            const linesObjetoPedido = doc.splitTextToSize(objetoPedidoValue, contentWidth - 4); 
             const heightObjetoPedidoText = linesObjetoPedido.length * 10 * pointsToMm * lineHeightFactor;
             
-            const minBoxHeight = 60; // Altura mínima da caixa
-            const textTopPaddingBox = 3; // Padding superior dentro da caixa
-            const textBottomPaddingBox = 3; // Padding inferior dentro da caixa
+            const minBoxHeight = 60; 
+            const textTopPaddingBox = 3; 
+            const textBottomPaddingBox = 3; 
             const requiredBoxHeight = Math.max(minBoxHeight, heightObjetoPedidoText + textTopPaddingBox + textBottomPaddingBox);
             
             const heightSecao2Titulo = getTextHeight(secao2Titulo, contentWidth, 12);
-            const totalHeightForSecao2 = heightSecao2Titulo + 2 + requiredBoxHeight; // +2 para espaço após título
+            const totalHeightForSecao2 = heightSecao2Titulo + 2 + requiredBoxHeight; 
 
-            ensurePageSpace(totalHeightForSecao2 + 5); // +5 para espaço após a caixa
+            ensurePageSpace(totalHeightForSecao2 + 5); 
 
-            // Desenhar título da Seção 2
             doc.setFontSize(12);
             doc.setFont(undefined, 'bold');
             doc.text(secao2Titulo, pageMargin, currentY);
-            currentY += heightSecao2Titulo + 2; // Espaço após o título da seção 2
+            currentY += heightSecao2Titulo + 2; 
             doc.setFont(undefined, 'normal');
 
-            // Desenhar caixa para o texto do requerimento
             doc.setDrawColor(200, 200, 200); 
             doc.setLineWidth(0.3);
             doc.rect(pageMargin, currentY, contentWidth, requiredBoxHeight); 
             
-            // Adicionar texto do requerimento dentro da caixa
             doc.setFontSize(10);
             doc.text(linesObjetoPedido, pageMargin + 2, currentY + textTopPaddingBox, { maxWidth: contentWidth - 4 });
-            currentY += requiredBoxHeight + 5; // Atualiza Y para depois da caixa de texto
+            currentY += requiredBoxHeight + 5; 
             
-
-            // --- Rodapé ---
-            ensurePageSpace(50); // Estimativa de altura para o rodapé (reduzido um pouco)
+            ensurePageSpace(50); 
 
             doc.setFontSize(11);
             const deferimentoText = 'Nestes termos, pede deferimento.';
@@ -602,13 +883,10 @@
             const assinaturaText = 'Sujeito passivo/Requerente (inclusive assinatura eletrônica)';
             const assinaturaHeight = getTextHeight(assinaturaText, contentWidth, 10);
             doc.text(assinaturaText, pageWidth / 2, currentY, { align: 'center' });
-            currentY += assinaturaHeight + 8; // Aumentado o espaço para o CPF
-            
-            // O texto "Clique Aqui e assine pelo Gov.br" foi REMOVIDO do PDF
+            currentY += assinaturaHeight + 8; 
             
             const cpfAssinaturaText = 'CPF nº ' + document.getElementById('cpfAssinatura').value;
             doc.text(cpfAssinaturaText, pageWidth / 2, currentY, { align: 'center' });
-            // currentY += getTextHeight(cpfAssinaturaText, contentWidth, 10); // Não precisa mais, é o último item
             
             doc.save('Requerimento_SEMFAZ.pdf');
             document.getElementById('gerarPdf').style.display = 'block';
