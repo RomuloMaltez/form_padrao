@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requerimento SEMFAZ Porto Velho</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        /* Estilos CSS para o formulário */
+        :root {
+            --primary-color: #0069b4; /* Cor primária (azul) */
+            --secondary-color: #f5f5f5; /* Cor secundária (cinza claro) */
+            --border-color: #ccc; /* Cor da borda */
+            --text-color: #333; /* Cor do texto principal */
+            --form-width: 210mm;  /* Largura do formulário, equivalente a A4 */
+        }
+        
+        * {
+            box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho total do elemento */
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif; /* Fonte padrão */
+        }
+        
+        body {
+            background-color: #f9f9f9; /* Cor de fundo da página */
+            color: var(--text-color);
+            display: flex;
+            justify-content: center; /* Centraliza o conteúdo na página */
+            padding: 20px; /* Espaçamento ao redor do corpo da página */
+        }
+        
+        .container {
+            background-color: white; /* Cor de fundo do contêiner do formulário */
+            width: 100%;
+            max-width: var(--form-width); /* Largura máxima do formulário */
+            padding: 20px; /* Espaçamento interno do contêiner */
+            border: 1px solid var(--border-color); /* Borda do contêiner */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Sombra suave */
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color); /* Linha azul abaixo do cabeçalho */
+            padding-bottom: 15px;
+        }
+        
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase; /* Texto em maiúsculas */
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .form-title {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            text-decoration: underline; /* Sublinhado no título do formulário */
+        }
+        
+        .intro-text {
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .form-section {
+            margin-bottom: 20px; /* Espaçamento entre seções do formulário */
+        }
+        
+        .form-group {
+            margin-bottom: 15px; /* Espaçamento entre grupos de campos */
+        }
+        
+        label {
+            display: block; /* Faz o label ocupar a linha inteira */
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        input, select, textarea {
+            width: 100%; /* Campos ocupam 100% da largura disponível */
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px; /* Bordas arredondadas */
+            font-size: 14px;
+        }
+        
+        input {
+            height: 38px; /* Altura padrão para campos de input */
+        }
+        
+        textarea {
+            min-height: 150px; /* Altura mínima para o campo de texto longo */
+            resize: vertical; /* Permite redimensionamento vertical */
+        }
+        
+        .form-row {
+            display: flex; /* Permite que os campos fiquem em linha */
+            flex-wrap: wrap; /* Quebra a linha se não houver espaço */
+            margin: 0 -10px; /* Compensa o padding dos .form-col */
+        }
+        
+        .form-col {
+            flex: 1; /* Distribui o espaço igualmente entre as colunas */
+            padding: 0 10px; /* Espaçamento lateral para as colunas */
+            min-width: 200px; /* Largura mínima para colunas */
+        }
+        
+        .form-col-small {
+            flex: 0 0 150px; /* Largura fixa para colunas menores */
+            padding: 0 10px;
+        }
+        
+        .form-col-xsmall {
+            flex: 0 0 120px; /* Largura fixa para colunas muito pequenas */
+            padding: 0 10px;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border-color); /* Linha abaixo do título da seção */
+            padding-bottom: 5px;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .date-field {
+            text-align: right; /* Alinha a data à direita */
+            margin: 20px 0;
+        }
+        
+        .signature-field {
+            border-top: 1px solid var(--border-color); /* Linha acima do campo de assinatura */
+            margin-top: 50px;
+            padding-top: 5px;
+            text-align: center;
+        }
+        
+        .btn {
+            background-color: var(--primary-color); /* Cor de fundo do botão */
+            color: white; /* Cor do texto do botão */
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background-color: #005091; /* Cor do botão ao passar o mouse */
+        }
+        
+        /* Estilos para impressão */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+            
+            .btn {
+                display: none; /* Esconde o botão ao imprimir */
+            }
+        }
+        
+        /* Estilos para telas menores (responsividade) */
+        @media (max-width: 768px) {
+            .form-col, .form-col-small, .form-col-xsmall {
+                flex: 0 0 100%; /* Colunas ocupam 100% da largura em telas pequenas */
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="form-container">
+        <div class="header">
+            <div class="title">Prefeitura do Município de Porto Velho</div>
+            <div class="subtitle">Secretaria Municipal de Fazenda</div>
+            <div class="form-title">REQUERIMENTO</div>
+        </div>
+        
+        <form id="semfazForm">
+            <div class="intro-text">
+                Ilmo. Sr. (a) Secretário (a) Municipal de Fazenda (SEMFAZ), trata-se de:
+            </div>
+            
+            <div class="form-group">
+                <select id="tipoRequerimento" name="tipoRequerimento" required>
+                    <option value="" selected disabled>Selecione o tipo de requerimento</option>
+                    <option value="Alteração Cadastral Econômica">Alteração Cadastral Econômica</option>
+                    <option value="Atualização de Cadastro de Imóvel">Atualização de Cadastro de Imóvel</option>
+                    <option value="Baixa de Inscrição Fiscal">Baixa de Inscrição Fiscal</option>
+                    <option value="Cancelamento de Dívida">Cancelamento de Dívida</option>
+                    <option value="Certidão Informativa">Certidão Informativa</option>
+                    <option value="Dedução Obra ISS">Dedução Obra ISS</option>
+                    <option value="Denúncia Espontânea do ISSQN">Denúncia Espontânea do ISSQN</option>
+                    <option value="Imunidade Autarquia e Fundação">Imunidade Autarquia e Fundação</option>
+                    <option value="Imunidade Entes Governamentais">Imunidade Entes Governamentais</option>
+                    <option value="Imunidade Entidade Educação e Assistência Social">Imunidade Entidade Educação e Assistência Social</option>
+                    <option value="Imunidade Entidade Sindical de Trabalhadores">Imunidade Entidade Sindical de Trabalhadores</option>
+                    <option value="Imunidade Partido Político">Imunidade Partido Político</option>
+                    <option value="Imunidade Templo de Qualquer Culto">Imunidade Templo de Qualquer Culto</option>
+                    <option value="Inexigibilidade de Licença de Funcionamento">Inexigibilidade de Licença de Funcionamento</option>
+                    <option value="Isenção IPTU Ex-Soldado da Borracha ou Viúva">Isenção IPTU Ex-Soldado da Borracha ou Viúva</option>
+                    <option value="Isenção IPTU Ferroviário EFMM">Isenção IPTU Ferroviário EFMM</option>
+                    <option value="Isenção IPTU/TRSD Bolsa Família">Isenção IPTU/TRSD Bolsa Família</option>
+                    <option value="Prescrição Tributária">Prescrição Tributária</option>
+                    <option value="Revalidação de Certificado Imunidade">Revalidação de Certificado Imunidade</option>
+                    <option value="Revisão de Área do Alvará ou da Publicidade">Revisão de Área do Alvará ou da Publicidade</option>
+                    <option value="Suspensão de Atividade Econômica">Suspensão de Atividade Econômica</option>
+                </select>
+            </div>
+            
+            <div class="form-section">
+                <div class="section-title">1. Identificação do sujeito passivo/Requerente</div>
+                
+                <div class="form-row">
+                    <div class="form-col" style="flex: 2;">
+                        <div class="form-group">
+                            <label for="nomeRazao">Nome/Razão social</label>
+                            <input type="text" id="nomeRazao" name="nomeRazao" placeholder="Digite o nome completo ou razão social" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-col" style="flex: 1; min-width: 180px;">
+                        <div class="form-group">
+                            <label for="cpfCnpj">CPF/CNPJ</label>
+                            <input type="text" id="cpfCnpj" name="cpfCnpj" placeholder="000.000.000-00 ou 00.000.000/0000-00" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col-small">
+                        <div class="form-group">
+                            <label for="telefone">Telefone/Celular</label>
+                            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" placeholder="exemplo@email.com" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="logradouro">Endereço de Correspondência</label>
+                    <input type="text" id="logradouro" name="logradouro" placeholder="Digite o endereço completo" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col-xsmall">
+                        <div class="form-group">
+                            <label for="numero">Nº</label>
+                            <input type="text" id="numero" name="numero" placeholder="Número" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="bairro">Bairro</label>
+                            <input type="text" id="bairro" name="bairro" placeholder="Digite o bairro" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col-small">
+                        <div class="form-group">
+                            <label for="cep">CEP</label>
+                            <input type="text" id="cep" name="cep" placeholder="00000-000" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="complemento">Complemento</label>
+                            <input type="text" id="complemento" name="complemento" placeholder="Apartamento, bloco, etc.">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <div class="form-group">
+                    <textarea id="objetoPedido" name="objetoPedido" placeholder="Descreva de forma legível o objeto do pedido, com a devida motivação e quaisquer outras razões que achar necessários à análise do pleito" required style="white-space: pre-wrap; overflow-wrap: break-word; word-wrap: break-word; min-height: 200px; font-size: 14px; line-height: 1.5;"></textarea>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div class="form-group">
+                    <p>Nestes termos, pede deferimento.</p>
+                </div>
+                
+                <div class="date-field" id="dataAtual">
+                    </div>
+                
+                <div class="signature-field">
+                    <p>Sujeito passivo/Requerente (inclusive assinatura eletrônica) <a href="https://www.gov.br/pt-br/servicos/assinatura-eletronica" target="_blank" style="color: var(--primary-color); font-weight: bold;">Clique Aqui</a> e assine pelo Gov.br</p>
+                    <div id="signatureSpace" style="height: 60px;"></div> <div class="form-group" style="max-width: 300px; margin: 0 auto;">
+                        <label for="cpfAssinatura">CPF nº</label>
+                        <input type="text" id="cpfAssinatura" name="cpfAssinatura" placeholder="000.000.000-00" required>
+                    </div>
+                </div>
+                
+                <button type="button" id="gerarPdf" class="btn">Gerar e Imprimir PDF</button>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // Função para formatar a data atual no formato "Porto Velho, DD de Mês de AAAA"
+        function formatarData() {
+            const meses = [
+                'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+                'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+            ];
+            
+            const dataAtual = new Date();
+            const dia = dataAtual.getDate();
+            const mes = meses[dataAtual.getMonth()]; // Pega o nome do mês
+            const ano = dataAtual.getFullYear();
+            
+            return `Porto Velho, ${dia} de ${mes} de ${ano}`;
+        }
+        
+        // Atualiza o campo de data no formulário assim que a página carrega
+        document.getElementById('dataAtual').textContent = formatarData();
+        
+        // Adiciona o listener de evento ao botão "Gerar PDF"
+        document.getElementById('gerarPdf').addEventListener('click', function() {
+            // Validação simples: verifica se todos os campos obrigatórios estão preenchidos
+            const form = document.getElementById('semfazForm');
+            const allInputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+            
+            allInputs.forEach(input => {
+                if (!input.value.trim()) { // Verifica se o valor (após remover espaços) está vazio
+                    input.style.borderColor = 'red'; // Destaca campos não preenchidos
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '#ccc'; // Restaura a borda normal
+                }
+            });
+            
+            if (!isValid) {
+                const alertDivId = 'form-validation-alert';
+                let alertDiv = document.getElementById(alertDivId);
+                if (!alertDiv) {
+                    alertDiv = document.createElement('div');
+                    alertDiv.id = alertDivId;
+                    alertDiv.style.color = 'red';
+                    alertDiv.style.textAlign = 'center';
+                    alertDiv.style.padding = '10px';
+                    alertDiv.style.border = '1px solid red';
+                    alertDiv.style.backgroundColor = '#ffe0e0';
+                    alertDiv.style.marginTop = '10px';
+                    alertDiv.style.marginBottom = '10px';
+                    alertDiv.style.borderRadius = '4px';
+                    form.insertBefore(alertDiv, form.firstChild);
+                }
+                alertDiv.textContent = 'Por favor, preencha todos os campos obrigatórios destacados em vermelho.';
+                
+                const firstInvalidInput = form.querySelector('input[style*="border-color: red"], select[style*="border-color: red"], textarea[style*="border-color: red"]');
+                if (firstInvalidInput) {
+                    firstInvalidInput.focus();
+                }
+                return; 
+            } else {
+                const existingAlert = document.getElementById('form-validation-alert');
+                if (existingAlert) {
+                    existingAlert.remove();
+                }
+            }
+            
+            document.getElementById('gerarPdf').style.display = 'none';
+            
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('p', 'mm', 'a4'); 
+            
+            const pageMargin = 10; 
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const contentWidth = pageWidth - (2 * pageMargin);
+            const lineHeightFactor = 1.2; // Fator para espaçamento entre linhas
+            const pointsToMm = 0.352778; // Conversão de pontos (tamanho da fonte) para mm
+
+            let currentY = pageMargin + 10; 
+
+            // Função auxiliar para adicionar nova página se necessário
+            function ensurePageSpace(requiredHeight) {
+                if (currentY + requiredHeight > pageHeight - pageMargin) {
+                    doc.addPage();
+                    currentY = pageMargin + 10; // Reinicia Y na nova página
+                }
+            }
+
+            // Função para obter altura estimada de um texto multilinhas
+            function getTextHeight(text, maxWidth, fontSize) {
+                doc.setFontSize(fontSize); // Define o tamanho da fonte para cálculo
+                const lines = doc.splitTextToSize(text, maxWidth);
+                return lines.length * fontSize * pointsToMm * lineHeightFactor;
+            }
+            
+            // Adicionar cabeçalho do PDF
+            doc.setFontSize(14);
+            doc.setFont(undefined, 'bold'); 
+            doc.text('PREFEITURA DO MUNICÍPIO DE PORTO VELHO', pageWidth / 2, currentY, { align: 'center' });
+            currentY += 6; // Ajuste de espaçamento
+            doc.setFontSize(12);
+            doc.text('SECRETARIA MUNICIPAL DE FAZENDA', pageWidth / 2, currentY, { align: 'center' });
+            currentY += 6; // Ajuste de espaçamento
+            doc.setFontSize(16);
+            doc.text('REQUERIMENTO', pageWidth / 2, currentY, { align: 'center' });
+            currentY += 6; // Espaço antes da linha
+            doc.setFont(undefined, 'normal'); 
+            
+            doc.setDrawColor(0, 105, 180); 
+            doc.setLineWidth(0.5);
+            doc.line(pageMargin, currentY, pageWidth - pageMargin, currentY);
+            currentY += 10; 
+            
+            // Texto introdutório
+            const introText = 'Ilmo. Sr. (a) Secretário (a) Municipal de Fazenda (SEMFAZ), trata-se de:';
+            const introTextHeight = getTextHeight(introText, contentWidth, 11);
+            ensurePageSpace(introTextHeight + 2);
+            doc.setFontSize(11);
+            doc.text(introText, pageMargin, currentY);
+            currentY += introTextHeight + 2;
+            
+            // Tipo de requerimento
+            const tipoRequerimento = document.getElementById('tipoRequerimento').value;
+            const tipoRequerimentoHeight = getTextHeight(tipoRequerimento, contentWidth, 12);
+            ensurePageSpace(tipoRequerimentoHeight + 4);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text(tipoRequerimento, pageMargin, currentY, {maxWidth: contentWidth});
+            currentY += tipoRequerimentoHeight + 4;
+            doc.setFont(undefined, 'normal');
+
+            // Seção 1: Identificação
+            const secao1Titulo = '1. Identificação do sujeito passivo/Requerente';
+            const secao1TituloHeight = getTextHeight(secao1Titulo, contentWidth, 12);
+            ensurePageSpace(secao1TituloHeight + 3); // Aumentado o espaço após o título
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text(secao1Titulo, pageMargin, currentY);
+            currentY += secao1TituloHeight + 3; // Aumentado o espaço após o título
+            doc.setFont(undefined, 'normal');
+            doc.setFontSize(10);
+
+            let fieldText;
+            let fieldHeight;
+            const fieldSpacing = 2; // Espaçamento entre os campos da Seção 1
+
+            // Nome/Razão social
+            fieldText = 'Nome/Razão social: ' + document.getElementById('nomeRazao').value;
+            fieldHeight = getTextHeight(fieldText, contentWidth, 10);
+            ensurePageSpace(fieldHeight + fieldSpacing);
+            doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
+            currentY += fieldHeight + fieldSpacing;
+
+            // CPF/CNPJ
+            fieldText = 'CPF/CNPJ: ' + document.getElementById('cpfCnpj').value;
+            fieldHeight = getTextHeight(fieldText, contentWidth, 10);
+            ensurePageSpace(fieldHeight + fieldSpacing);
+            doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
+            currentY += fieldHeight + fieldSpacing;
+            
+            // Telefone/Celular
+            fieldText = 'Telefone/Celular: ' + document.getElementById('telefone').value;
+            fieldHeight = getTextHeight(fieldText, contentWidth, 10);
+            ensurePageSpace(fieldHeight + fieldSpacing);
+            doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
+            currentY += fieldHeight + fieldSpacing;
+
+            // E-mail
+            fieldText = 'E-mail: ' + document.getElementById('email').value;
+            fieldHeight = getTextHeight(fieldText, contentWidth, 10);
+            ensurePageSpace(fieldHeight + fieldSpacing);
+            doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
+            currentY += fieldHeight + fieldSpacing;
+            
+            // Endereço de Correspondência
+            fieldText = 'Endereço de Correspondência: ' + document.getElementById('logradouro').value;
+            fieldHeight = getTextHeight(fieldText, contentWidth, 10);
+            ensurePageSpace(fieldHeight + fieldSpacing);
+            doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
+            currentY += fieldHeight + fieldSpacing;
+
+            // Nº
+            fieldText = 'Nº: ' + document.getElementById('numero').value;
+            fieldHeight = getTextHeight(fieldText, contentWidth, 10);
+            ensurePageSpace(fieldHeight + fieldSpacing);
+            doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
+            currentY += fieldHeight + fieldSpacing;
+
+            // Bairro
+            fieldText = 'Bairro: ' + document.getElementById('bairro').value;
+            fieldHeight = getTextHeight(fieldText, contentWidth, 10);
+            ensurePageSpace(fieldHeight + fieldSpacing);
+            doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
+            currentY += fieldHeight + fieldSpacing;
+
+            // CEP
+            fieldText = 'CEP: ' + document.getElementById('cep').value;
+            fieldHeight = getTextHeight(fieldText, contentWidth, 10);
+            ensurePageSpace(fieldHeight + fieldSpacing);
+            doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
+            currentY += fieldHeight + fieldSpacing;
+
+            // Complemento
+            fieldText = 'Complemento: ' + document.getElementById('complemento').value;
+            fieldHeight = getTextHeight(fieldText, contentWidth, 10);
+            ensurePageSpace(fieldHeight + 4); // Espaço maior antes da próxima seção
+            doc.text(fieldText, pageMargin, currentY, {maxWidth: contentWidth});
+            currentY += fieldHeight + 4;
+
+
+            // --- SEÇÃO 2: Objeto do Pedido ---
+            const secao2Titulo = '2. O sujeito passivo acima identificado vem requerer:';
+            const objetoPedidoValue = document.getElementById('objetoPedido').value.trim();
+            
+            doc.setFontSize(10); // Fonte para o texto do objetoPedido
+            const linesObjetoPedido = doc.splitTextToSize(objetoPedidoValue, contentWidth - 4); // -4 para padding da caixa (2mm de cada lado)
+            const heightObjetoPedidoText = linesObjetoPedido.length * 10 * pointsToMm * lineHeightFactor;
+            
+            const minBoxHeight = 60; // Altura mínima da caixa
+            const textTopPaddingBox = 3; // Padding superior dentro da caixa
+            const textBottomPaddingBox = 3; // Padding inferior dentro da caixa
+            const requiredBoxHeight = Math.max(minBoxHeight, heightObjetoPedidoText + textTopPaddingBox + textBottomPaddingBox);
+            
+            const heightSecao2Titulo = getTextHeight(secao2Titulo, contentWidth, 12);
+            const totalHeightForSecao2 = heightSecao2Titulo + 2 + requiredBoxHeight; // +2 para espaço após título
+
+            ensurePageSpace(totalHeightForSecao2 + 5); // +5 para espaço após a caixa
+
+            // Desenhar título da Seção 2
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text(secao2Titulo, pageMargin, currentY);
+            currentY += heightSecao2Titulo + 2; // Espaço após o título da seção 2
+            doc.setFont(undefined, 'normal');
+
+            // Desenhar caixa para o texto do requerimento
+            doc.setDrawColor(200, 200, 200); 
+            doc.setLineWidth(0.3);
+            doc.rect(pageMargin, currentY, contentWidth, requiredBoxHeight); 
+            
+            // Adicionar texto do requerimento dentro da caixa
+            doc.setFontSize(10);
+            doc.text(linesObjetoPedido, pageMargin + 2, currentY + textTopPaddingBox, { maxWidth: contentWidth - 4 });
+            currentY += requiredBoxHeight + 5; // Atualiza Y para depois da caixa de texto
+            
+
+            // --- Rodapé ---
+            ensurePageSpace(50); // Estimativa de altura para o rodapé (reduzido um pouco)
+
+            doc.setFontSize(11);
+            const deferimentoText = 'Nestes termos, pede deferimento.';
+            const deferimentoHeight = getTextHeight(deferimentoText, contentWidth, 11);
+            doc.text(deferimentoText, pageWidth / 2, currentY, { align: 'center' });
+            currentY += deferimentoHeight + 8;
+            
+            const dataAtualTexto = formatarData();
+            const dataAtualHeight = getTextHeight(dataAtualTexto, contentWidth, 11);
+            doc.text(dataAtualTexto, pageWidth / 2, currentY, { align: 'center' });
+            currentY += dataAtualHeight + 15;
+            
+            doc.setDrawColor(150, 150, 150); 
+            doc.line(pageMargin + 40, currentY, pageWidth - pageMargin - 40, currentY);
+            currentY += 4;
+            
+            doc.setFontSize(10);
+            const assinaturaText = 'Sujeito passivo/Requerente (inclusive assinatura eletrônica)';
+            const assinaturaHeight = getTextHeight(assinaturaText, contentWidth, 10);
+            doc.text(assinaturaText, pageWidth / 2, currentY, { align: 'center' });
+            currentY += assinaturaHeight + 8; // Aumentado o espaço para o CPF
+            
+            // O texto "Clique Aqui e assine pelo Gov.br" foi REMOVIDO do PDF
+            
+            const cpfAssinaturaText = 'CPF nº ' + document.getElementById('cpfAssinatura').value;
+            doc.text(cpfAssinaturaText, pageWidth / 2, currentY, { align: 'center' });
+            // currentY += getTextHeight(cpfAssinaturaText, contentWidth, 10); // Não precisa mais, é o último item
+            
+            doc.save('Requerimento_SEMFAZ.pdf');
+            document.getElementById('gerarPdf').style.display = 'block';
+        });
+        
+        // Funções para formatação automática de campos
+        document.getElementById('cpfCnpj').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, ''); 
+            if (value.length <= 11) { 
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            } else { 
+                value = value.replace(/^(\d{2})(\d)/, '$1.$2'); 
+                value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+                value = value.replace(/\.(\d{3})(\d)/, '.$1/$2'); 
+                value = value.replace(/(\d{4})(\d)/, '$1-$2'); 
+            }
+            e.target.value = value.substring(0, 18); 
+        });
+        
+        document.getElementById('cpfAssinatura').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            e.target.value = value.substring(0, 14); 
+        });
+        
+        document.getElementById('cep').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(\d{5})(\d)/, '$1-$2');
+            e.target.value = value.substring(0, 9); 
+        });
+        
+        document.getElementById('telefone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 10) { 
+                value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+            } else if (value.length > 9) { 
+                 value = value.replace(/^(\d{2})(\d{4})(\d{4}).*/, '($1) $2-$3');
+            } else if (value.length > 5) { 
+                value = value.replace(/^(\d{2})(\d{4})/, '($1) $2');
+            } else if (value.length > 1) { 
+                value = value.replace(/^(\d{2})/, '($1)');
+            }
+            e.target.value = value.substring(0, 15); 
+        });
+        
+        document.getElementById('objetoPedido').addEventListener('input', function() {
+            this.style.height = 'auto'; 
+            this.style.height = (this.scrollHeight) + 'px'; 
+            this.style.whiteSpace = 'pre-wrap'; 
+        });
+    </script>
+</body>
+</html>
