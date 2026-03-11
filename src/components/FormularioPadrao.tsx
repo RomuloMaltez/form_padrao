@@ -619,149 +619,204 @@ function SelectField({
   );
 }
 
-const pdfHeaderStyle: CSSProperties = {
-  textAlign: "center",
-  marginBottom: "18px",
-  borderBottom: "2px solid #333",
-  paddingBottom: "12px",
-};
-
-const pdfTitleStyle: CSSProperties = {
-  fontSize: "17pt",
-  marginBottom: "6px",
-  color: "#000",
-  fontWeight: 700,
-};
-
-const pdfSubTitleStyle: CSSProperties = {
-  fontSize: "13pt",
-  marginBottom: "4px",
-  fontWeight: 400,
-  color: "#333",
-};
-
-const pdfHeaderTextStyle: CSSProperties = {
-  fontSize: "9pt",
-  color: "#666",
-};
-
-const pdfSectionTitleStyle: CSSProperties = {
-  background: "#333",
-  color: "#fff",
-  padding: "0 0 15px 5px",
-  margin: "12px 0 8px 0",
-  fontSize: "11pt",
-  fontWeight: 700,
-};
-
-const pdfFieldLineStyle: CSSProperties = {
-  marginBottom: "6px",
-  lineHeight: 1.6,
-};
-
-const pdfParagraphStyle: CSSProperties = {
-  marginBottom: "10px",
-  textAlign: "justify",
-};
-
-const pdfHrStyle: CSSProperties = {
-  border: "none",
-  borderTop: "1px solid #333",
-  margin: "15px 0",
-};
-
-const pdfSignatureAreaStyle: CSSProperties = {
-  marginTop: "35px",
-  textAlign: "center",
-};
-
-const pdfSignatureLineStyle: CSSProperties = {
-  borderTop: "1px solid #000",
-  width: "300px",
-  margin: "95px auto 8px",
-};
-
-const TIMBRADO_HEADER_SRC = "/semec-timbrado-cabecalho.png";
-const TIMBRADO_FOOTER_SRC = "/semec-timbrado-rodape.png";
-
-const pdfPaperStyle: CSSProperties = {
-  position: "relative",
-  width: "210mm",
-  minHeight: "310mm",
-  height: "310mm",
-  background: "#ffffff",
-  overflow: "hidden",
-};
-
-const HEADER_SPACE = "28mm";
-const FOOTER_SPACE = "26mm";
-
-const pdfTimbradoHeaderStyle: CSSProperties = {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  right: 0,
-  height: HEADER_SPACE,
-  zIndex: 1,
-};
-
-const pdfTimbradoHeaderImgStyle: CSSProperties = {
-  width: "100%",
-  display: "block",
-};
-
-const pdfTimbradoFooterStyle: CSSProperties = {
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  right: 0,
-  height: FOOTER_SPACE,
-  zIndex: 1,
-};
-
-const pdfTimbradoFooterImgStyle: CSSProperties = {
-  width: "100%",
-  display: "block",
-};
-
-const pdfContentLayerStyle: CSSProperties = {
-  position: "relative",
-  zIndex: 2,
-  boxSizing: "border-box",
-  width: "190mm",
-  paddingTop: `calc(${HEADER_SPACE} + 2mm)`,
-  paddingBottom: `calc(${FOOTER_SPACE} + 6mm)`,
-  margin: "0 auto",
-  background: "transparent",
-  fontFamily: "Arial, sans-serif",
-  fontSize: "10.5pt",
-  lineHeight: 1.4,
-  color: "#000000",
-};
+function getPdfGeneratedDateLabel() {
+  return new Intl.DateTimeFormat("pt-BR").format(new Date());
+}
 
 function PdfPageFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="pdf-page" style={pdfPaperStyle}>
-      <div style={pdfTimbradoHeaderStyle}>
-        <img
-          src={TIMBRADO_HEADER_SRC}
-          alt=""
-          style={pdfTimbradoHeaderImgStyle}
-        />
-      </div>
+    <div data-pdf-page="true" style={pdfPageWrapperStyle}>
+      <div style={pdfPaperStyle}>
+        <div style={pdfMunicipalHeaderStyle}>
+          <div style={pdfMunicipalTitleStyle}>
+            PREFEITURA MUNICIPAL DE PORTO VELHO
+          </div>
+          <div style={pdfMunicipalSubtitleStyle}>
+            SECRETARIA MUNICIPAL DE ECONOMIA
+          </div>
+        </div>
 
-      <div style={pdfTimbradoFooterStyle}>
-        <img
-          src={TIMBRADO_FOOTER_SRC}
-          alt=""
-          style={pdfTimbradoFooterImgStyle}
-        />
-      </div>
+        <div style={pdfTopGreenLineStyle} />
 
-      <div style={pdfContentLayerStyle}>{children}</div>
+        {children}
+
+        <div style={pdfFooterStyle}>
+          <span>Anexo – Requerimento Padrão</span>
+          <span>
+            Documento gerado eletronicamente em {getPdfGeneratedDateLabel()}
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
+
+const pdfPageWrapperStyle: CSSProperties = {
+  width: "794px",
+  minHeight: "1123px",
+  padding: "24px",
+  boxSizing: "border-box",
+  background: "#efefef",
+  pageBreakAfter: "always",
+  fontFamily: "Arial, Helvetica, sans-serif",
+  color: "#24344c",
+};
+
+const pdfPaperStyle: CSSProperties = {
+  width: "100%",
+  minHeight: "1075px",
+  background: "#ffffff",
+  border: "1px solid #d8dde6",
+  padding: "20px 22px 16px",
+  boxSizing: "border-box",
+};
+
+const pdfMunicipalHeaderStyle: CSSProperties = {
+  textAlign: "center",
+  paddingTop: "2px",
+  paddingBottom: "10px",
+};
+
+const pdfMunicipalTitleStyle: CSSProperties = {
+  color: "#1e3a5f",
+  fontSize: "18px",
+  fontWeight: 700,
+  lineHeight: 1.2,
+};
+
+const pdfMunicipalSubtitleStyle: CSSProperties = {
+  color: "#1e3a5f",
+  fontSize: "13px",
+  fontWeight: 700,
+  lineHeight: 1.2,
+  marginTop: "2px",
+};
+
+const pdfMunicipalSmallTextStyle: CSSProperties = {
+  color: "#6b7280",
+  fontSize: "10px",
+  lineHeight: 1.2,
+  marginTop: "2px",
+};
+
+const pdfTopGreenLineStyle: CSSProperties = {
+  height: "2px",
+  background: "#70B643",
+  marginBottom: "14px",
+};
+
+const pdfHeaderStyle: CSSProperties = {
+  textAlign: "center",
+  padding: "6px 0 10px",
+};
+
+const pdfTitleStyle: CSSProperties = {
+  color: "#70B643",
+  fontSize: "20px",
+  fontWeight: 700,
+  textTransform: "uppercase",
+  lineHeight: 1.25,
+};
+
+const pdfSubTitleStyle: CSSProperties = {
+  color: "#1e3a5f",
+  fontSize: "12px",
+  fontWeight: 700,
+  marginTop: "4px",
+  textTransform: "uppercase",
+};
+
+const pdfHeaderTextStyle: CSSProperties = {
+  margin: "6px 0 0",
+  fontSize: "10.5px",
+  color: "#374151",
+  lineHeight: 1.5,
+};
+
+const pdfSectionTitleStyle: CSSProperties = {
+  background: "#1e3a5f",
+  color: "#ffffff",
+  padding: "8px 10px",
+  fontSize: "11px",
+  fontWeight: 700,
+  textTransform: "uppercase",
+  marginTop: "14px",
+  marginBottom: "10px",
+};
+
+const pdfFieldLineStyle: CSSProperties = {
+  fontSize: "10.5px",
+  lineHeight: 1.55,
+  marginBottom: "6px",
+  color: "#24344c",
+};
+
+const pdfParagraphStyle: CSSProperties = {
+  fontSize: "10.5px",
+  lineHeight: 1.65,
+  textAlign: "justify",
+  color: "#24344c",
+  margin: "0 0 10px",
+};
+
+const pdfTableStyle: CSSProperties = {
+  width: "100%",
+  borderCollapse: "collapse",
+  marginBottom: "10px",
+  fontSize: "10px",
+};
+
+const pdfThStyle: CSSProperties = {
+  border: "1px solid #cfd6e0",
+  background: "#1e3a5f",
+  color: "#ffffff",
+  padding: "7px 8px",
+  textAlign: "left",
+  fontWeight: 700,
+};
+
+const pdfCellStyle: CSSProperties = {
+  border: "1px solid #cfd6e0",
+  padding: "7px 8px",
+  verticalAlign: "top",
+  background: "#ffffff",
+};
+
+const pdfCheckboxLineStyle: CSSProperties = {
+  fontSize: "10.5px",
+  lineHeight: 1.55,
+  marginBottom: "8px",
+  color: "#24344c",
+};
+
+const pdfHrStyle: CSSProperties = {
+  borderTop: "1px solid #d7dde6",
+  margin: "18px 0",
+};
+
+const pdfSignatureAreaStyle: CSSProperties = {
+  marginTop: "96px",
+  textAlign: "center",
+  minHeight: "92px",
+};
+
+const pdfSignatureLineStyle: CSSProperties = {
+  width: "290px",
+  borderTop: "1px solid #1e3a5f",
+  margin: "34px auto 8px",
+};
+
+const pdfFooterStyle: CSSProperties = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: "12px",
+  marginTop: "18px",
+  paddingTop: "8px",
+  borderTop: "1px solid #d8dde6",
+  fontSize: "9px",
+  color: "#6b7280",
+};
 
 /** ======= COMPONENTE FINAL ======= */
 
@@ -911,64 +966,70 @@ export default function RequerimentoSemfazForm() {
 
   async function generatePdf() {
     if (!validateForm()) return;
-
-    if (!pdfRef.current) {
-      alert("Erro ao preparar o conteúdo do PDF.");
-      return;
-    }
-
-    setIsGeneratingPdf(true);
+    if (!pdfRef.current || isGeneratingPdf) return;
 
     try {
-      await new Promise<void>((resolve) => {
-        requestAnimationFrame(() => setTimeout(() => resolve(), 300));
-      });
+      setIsGeneratingPdf(true);
 
-      const images = Array.from(
-        pdfRef.current.querySelectorAll("img"),
-      ) as HTMLImageElement[];
-
-      await Promise.all(
-        images.map(
-          (img) =>
-            new Promise<void>((resolve) => {
-              if (img.complete) return resolve();
-              img.onload = () => resolve();
-              img.onerror = () => resolve();
-            }),
-        ),
-      );
-
-      const pages = pdfRef.current.querySelectorAll<HTMLElement>(".pdf-page");
-      if (!pages.length)
-        throw new Error("Nenhuma página do PDF foi encontrada.");
-
-      const pdf = new jsPDF("p", "mm", "a4");
-
-      for (let i = 0; i < pages.length; i++) {
-        if (i > 0) pdf.addPage();
-
-        const canvas = await html2canvas(pages[i], {
-          scale: 2,
-          useCORS: true,
-          logging: false,
-          backgroundColor: "#ffffff",
-          width: pages[i].scrollWidth,
-          height: pages[i].scrollHeight,
-          windowWidth: pages[i].scrollWidth,
-          windowHeight: pages[i].scrollHeight,
-        });
-
-        const imgData = canvas.toDataURL("image/jpeg", 0.95);
-        pdf.addImage(imgData, "JPEG", 0, 0, 210, 297);
+      if (document.fonts?.ready) {
+        await document.fonts.ready;
       }
 
-      pdf.save("Requerimento_SEMFAZ.pdf");
+      await new Promise((resolve) => setTimeout(resolve, 120));
+
+      const pageNodes = Array.from(
+        pdfRef.current.querySelectorAll('[data-pdf-page="true"]'),
+      ) as HTMLElement[];
+
+      if (!pageNodes.length) {
+        throw new Error("Nenhuma página PDF foi encontrada para renderização.");
+      }
+
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+        compress: true,
+      });
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+
+      for (let index = 0; index < pageNodes.length; index += 1) {
+        const page = pageNodes[index];
+
+        const canvas = await html2canvas(page, {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: "#efefef",
+          logging: false,
+          windowWidth: page.scrollWidth,
+          windowHeight: page.scrollHeight,
+        });
+
+        const imgData = canvas.toDataURL("image/png", 1.0);
+
+        if (index > 0) {
+          pdf.addPage();
+        }
+
+        pdf.addImage(
+          imgData,
+          "PNG",
+          0,
+          0,
+          pdfWidth,
+          pdfHeight,
+          undefined,
+          "FAST",
+        );
+      }
+
+      const fileDate = new Date().toISOString().slice(0, 10);
+      pdf.save(`requerimento-semfaz-${fileDate}.pdf`);
     } catch (error) {
       console.error("Erro ao gerar PDF:", error);
-      alert(
-        `Erro ao gerar PDF: ${error instanceof Error ? error.message : "erro desconhecido"}`,
-      );
+      alert("Não foi possível gerar o PDF. Tente novamente.");
     } finally {
       setIsGeneratingPdf(false);
     }
@@ -1008,8 +1069,8 @@ export default function RequerimentoSemfazForm() {
           </h4>
 
           <p className="mb-6 text-sm leading-6 text-gray-700 md:text-base">
-            Ilmo. Sr. (a) Secretário (a) Municipal de Fazenda (SEMFAZ), trata-se
-            de:
+            Ilmo. Sr. (a) Secretário (a) Municipal de Economia (SEMFAZ),
+            trata-se de:
           </p>
 
           <SectionCard title="TIPO DE REQUERIMENTO">
@@ -1212,19 +1273,19 @@ export default function RequerimentoSemfazForm() {
           zIndex: -1,
         }}
       >
-        {/* Página 1: Header + Seção 1 + Seção 2 (primeiro chunk) */}
+        {}
         <PdfPageFrame>
           <div style={pdfHeaderStyle}>
-            <div style={pdfTitleStyle}>
-              PREFEITURA DO MUNICÍPIO DE PORTO VELHO
-            </div>
-            <div style={pdfSubTitleStyle}>SECRETARIA MUNICIPAL DE FAZENDA</div>
-            <p style={pdfHeaderTextStyle}>REQUERIMENTO</p>
+            <div style={pdfTitleStyle}>REQUERIMENTO PADRÃO</div>
+            <p style={pdfHeaderTextStyle}>
+              Prefeitura Municipal de Porto Velho - Secretaria Municipal de
+              Economia
+            </p>
           </div>
 
           <p style={pdfParagraphStyle}>
             <strong>
-              Ilmo. Sr. (a) Secretário (a) Municipal de Fazenda (SEMFAZ),
+              Ilmo. Sr. (a) Secretário (a) Municipal de Economia (SEMFAZ),
               trata-se de:
             </strong>
           </p>
@@ -1271,7 +1332,7 @@ export default function RequerimentoSemfazForm() {
           </p>
         </PdfPageFrame>
 
-        {/* Páginas extras (continuação do pedido) */}
+        {}
         {objetoChunks.slice(1).map((chunk, idx) => (
           <PdfPageFrame key={`pdf-obj-${idx}`}>
             <div style={pdfHeaderStyle}>
@@ -1295,7 +1356,10 @@ export default function RequerimentoSemfazForm() {
           <div style={pdfHeaderStyle}>
             <div style={pdfTitleStyle}>REQUERIMENTO</div>
             <div style={pdfSubTitleStyle}>Encerramento</div>
-            <p style={pdfHeaderTextStyle}>SEMFAZ - Porto Velho</p>
+            <p style={pdfHeaderTextStyle}>
+              Prefeitura Municipal de Porto Velho - Secretaria Municipal de
+              Economia
+            </p>
           </div>
 
           <p style={{ ...pdfParagraphStyle, textAlign: "center" }}>
