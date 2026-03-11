@@ -1,11 +1,5 @@
 import Image from "next/image";
-import {
-  Clock,
-  Instagram,
-  Mail,
-  MapPin,
-  Phone,
-} from "lucide-react";
+import { Clock, Instagram, Mail, MapPin, Phone } from "lucide-react";
 
 import SemecLogo from "@/assets/images/Logo_Semec_Borda_Branca.png";
 import { WhatsappIcon } from "@/components/icons/WhatsappIcon";
@@ -21,12 +15,6 @@ const contactItems = [
     value: "gab.semec@portovelho.ro.gov.br",
     icon: Mail,
     href: "mailto:gab.semec@portovelho.ro.gov.br",
-  },
-  {
-    label: "Dúvidas Tributárias",
-    value: "reformatrib.semec@portovelho.ro.gov.br",
-    icon: Mail,
-    href: "mailto:reformatrib.semec@portovelho.ro.gov.br",
   },
 ];
 
@@ -49,15 +37,6 @@ export default function Footer() {
             <Image
               src={SemecLogo}
               alt="Logo oficial da SEMEC Porto Velho"
-              width={100}
-              height={100}
-              className="h-auto w-[80px] drop-shadow-md sm:w-[90px] md:w-[100px]"
-              priority
-            />
-            <div className="h-12 w-px bg-white/30 sm:h-14" aria-hidden="true" />
-            <Image
-              src="/logo-nfse.png"
-              alt="Logo da Nota Fiscal de Serviço Eletrônica"
               width={100}
               height={100}
               className="h-auto w-[80px] drop-shadow-md sm:w-[90px] md:w-[100px]"
@@ -107,8 +86,16 @@ export default function Footer() {
               </address>
 
               <div className="flex items-center gap-2 rounded-lg bg-[color:var(--pv-blue-900)]/5 px-2.5 py-2 sm:px-3">
-                <Clock size={13} className="shrink-0 text-[color:var(--pv-blue-900)] sm:hidden" aria-hidden />
-                <Clock size={14} className="hidden shrink-0 text-[color:var(--pv-blue-900)] sm:block" aria-hidden />
+                <Clock
+                  size={13}
+                  className="shrink-0 text-[color:var(--pv-blue-900)] sm:hidden"
+                  aria-hidden
+                />
+                <Clock
+                  size={14}
+                  className="hidden shrink-0 text-[color:var(--pv-blue-900)] sm:block"
+                  aria-hidden
+                />
                 <span className="text-[0.7rem] font-semibold text-[color:var(--pv-blue-900)] sm:text-xs">
                   Atendimento: 08h às 14h
                 </span>
@@ -165,21 +152,25 @@ export default function Footer() {
 
               {/* WhatsApp */}
               <a
-                href="https://wa.me/556999422066"
+                href="https://api.whatsapp.com/send?phone=556999425251"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group !mt-3 flex items-center gap-2.5 rounded-lg border border-[#70B643] bg-white p-2.5 transition hover:bg-[#70B643]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#70B643] sm:!mt-4 sm:gap-3 sm:p-3"
               >
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-[#70B643] bg-white text-[#70B643] shadow-sm transition group-hover:scale-105 sm:h-10 sm:w-10">
                   <WhatsappIcon size={16} className="sm:hidden" aria-hidden />
-                  <WhatsappIcon size={18} className="hidden sm:block" aria-hidden />
+                  <WhatsappIcon
+                    size={18}
+                    className="hidden sm:block"
+                    aria-hidden
+                  />
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="text-[0.55rem] font-semibold uppercase tracking-wider text-[color:var(--pv-blue-700)] sm:text-[0.6rem]">
                     WhatsApp
                   </p>
                   <p className="text-[0.7rem] font-medium text-[color:var(--pv-blue-900)] sm:text-xs">
-                    (69) 9 9942-2066
+                    (69) 9 9942-5251
                   </p>
                 </div>
               </a>
@@ -207,7 +198,8 @@ export default function Footer() {
             {/* Conteúdo */}
             <div className="mt-3 flex-1 space-y-3 sm:mt-4 sm:space-y-4">
               <p className="text-[0.8rem] leading-relaxed text-[color:var(--pv-blue-900)]/80 sm:text-sm">
-                Acompanhe nossos canais oficiais e fique por dentro das novidades sobre a{" "}
+                Acompanhe nossos canais oficiais e fique por dentro das
+                novidades sobre a{" "}
                 <strong className="text-[color:var(--pv-blue-900)]">
                   Reforma Tributária do Consumo
                 </strong>
@@ -238,11 +230,17 @@ export default function Footer() {
                       >
                         <span
                           className={`flex h-full w-full items-center justify-center rounded sm:rounded-md ${
-                            isInstagram ? "bg-white text-[#C13584]" : "bg-white text-[#70B643]"
+                            isInstagram
+                              ? "bg-white text-[#C13584]"
+                              : "bg-white text-[#70B643]"
                           }`}
                         >
                           <Icon size={14} className="sm:hidden" aria-hidden />
-                          <Icon size={16} className="hidden sm:block" aria-hidden />
+                          <Icon
+                            size={16}
+                            className="hidden sm:block"
+                            aria-hidden
+                          />
                         </span>
                       </span>
                       <span className="text-[0.8rem] font-semibold text-[color:var(--pv-blue-900)] sm:text-sm">
@@ -259,7 +257,8 @@ export default function Footer() {
         {/* Copyright */}
         <div className="mt-6 border-t border-white/20 pt-4 text-center sm:mt-8">
           <p className="text-[0.6rem] text-white/60 sm:text-[0.65rem]">
-            © {new Date().getFullYear()} Prefeitura Municipal de Porto Velho • Todos os direitos reservados
+            © {new Date().getFullYear()} Prefeitura Municipal de Porto Velho •
+            Todos os direitos reservados
           </p>
         </div>
       </div>

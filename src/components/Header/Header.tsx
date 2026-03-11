@@ -8,7 +8,7 @@ import {
   useState,
   type FormEvent,
 } from "react";
-import { Instagram, Search, User2 } from "lucide-react";
+import { Instagram, Search } from "lucide-react";
 
 import IlustracaoCidade from "@/components/ui/ilustracao-cidade";
 import LogoPrefeitura from "@/components/ui/logo-prefeitura";
@@ -41,33 +41,29 @@ const openDetailsAncestors = (element: HTMLElement) => {
 
 const collectTextNodes = (root: HTMLElement): Text[] => {
   const nodes: Text[] = [];
-  const walker = document.createTreeWalker(
-    root,
-    NodeFilter.SHOW_TEXT,
-    {
-      acceptNode(node) {
-        if (!node.textContent?.trim()) {
-          return NodeFilter.FILTER_REJECT;
-        }
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      if (!node.textContent?.trim()) {
+        return NodeFilter.FILTER_REJECT;
+      }
 
-        const parent = node.parentElement;
-        if (!parent) {
-          return NodeFilter.FILTER_REJECT;
-        }
+      const parent = node.parentElement;
+      if (!parent) {
+        return NodeFilter.FILTER_REJECT;
+      }
 
-        if (
-          parent.closest(`[${HIGHLIGHT_ATTRIBUTE}]`) ||
-          parent.closest("[data-search-ignore='true']") ||
-          parent.closest("script, style") ||
-          parent.closest("[aria-hidden='true']")
-        ) {
-          return NodeFilter.FILTER_REJECT;
-        }
+      if (
+        parent.closest(`[${HIGHLIGHT_ATTRIBUTE}]`) ||
+        parent.closest("[data-search-ignore='true']") ||
+        parent.closest("script, style") ||
+        parent.closest("[aria-hidden='true']")
+      ) {
+        return NodeFilter.FILTER_REJECT;
+      }
 
-        return NodeFilter.FILTER_ACCEPT;
-      },
+      return NodeFilter.FILTER_ACCEPT;
     },
-  );
+  });
 
   let currentNode = walker.nextNode();
   while (currentNode) {
@@ -160,21 +156,8 @@ const clearHighlights = () => {
 
 export default function Header() {
   const [query, setQuery] = useState("");
-  const [feedback, setFeedback] = useState<string | null>(null);
-  const feedbackTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const showFeedback = useCallback((message: string) => {
-    setFeedback(message);
-
-    if (feedbackTimeoutRef.current) {
-      clearTimeout(feedbackTimeoutRef.current);
-    }
-
-    feedbackTimeoutRef.current = setTimeout(() => {
-      setFeedback(null);
-      feedbackTimeoutRef.current = null;
-    }, 4000);
-  }, []);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
@@ -183,44 +166,31 @@ export default function Header() {
 
       if (trimmedQuery.length < 3) {
         clearHighlights();
-        showFeedback("Por favor, informe ao menos 3 caracteres para buscar.");
-        return;
-      }
-
-      if (typeof document === "undefined") {
-        showFeedback("Não foi possível executar a busca.");
-        return;
-      }
-
-      const hasSearchableContent = getSearchRoots().length > 0;
-      if (!hasSearchableContent) {
-        showFeedback("Não há conteúdo disponível para pesquisa nesta página.");
+        alert("Por favor, digite pelo menos 3 caracteres para buscar.");
         return;
       }
 
       clearHighlights();
-
       const hits = highlightMatches(trimmedQuery);
 
       if (!hits.length) {
-        showFeedback("Nenhum resultado encontrado.");
+        alert("Nenhum resultado encontrado na página.");
         return;
       }
 
-      const firstHit = hits[0];
-      firstHit.scrollIntoView({ behavior: "smooth", block: "center" });
-      if (typeof firstHit.focus === "function") {
-        firstHit.focus({ preventScroll: true });
-      }
-
-      showFeedback(
-        hits.length === 1
-          ? "1 resultado encontrado."
-          : `${hits.length} resultados encontrados.`,
-      );
+      hits[0].scrollIntoView({ behavior: "smooth", block: "center" });
     },
-    [query, showFeedback],
+    [query],
   );
+
+  const toggleSearch = useCallback(() => {
+    setIsSearchOpen((prev) => {
+      if (!prev) {
+        setTimeout(() => searchInputRef.current?.focus(), 50);
+      }
+      return !prev;
+    });
+  }, []);
 
   useEffect(() => {
     if (!query.trim()) {
@@ -229,11 +199,19 @@ export default function Header() {
   }, [query]);
 
   useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        !target.closest("#site-search-form") &&
+        !target.closest("#search-toggle")
+      ) {
+        setIsSearchOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
     return () => {
       clearHighlights();
-      if (feedbackTimeoutRef.current) {
-        clearTimeout(feedbackTimeoutRef.current);
-      }
+      document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
@@ -255,74 +233,71 @@ export default function Header() {
             <IlustracaoCidade />
           </div>
 
-          <div className="order-2 flex flex-col gap-3 lg:order-3 lg:items-end">
-            <div className="flex w-full items-center justify-end gap-3 lg:w-[300px]">
-              <div className="flex items-center gap-2">
+          <div className="order-2 flex flex-col gap-3 lg:order-3 lg:items-center">
+            <div className="flex w-full items-center justify-center gap-4 lg:w-75">
+              <div className="flex items-center gap-4">
                 <a
                   href="https://www.instagram.com/semec.pvh/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram da SEMEC"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-rose-100 bg-rose-50 text-[#E1306C] shadow-sm transition hover:border-rose-200 hover:bg-rose-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E1306C]"
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-md border border-rose-100 bg-rose-50 text-[#E1306C] shadow-sm transition hover:border-rose-200 hover:bg-rose-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E1306C]"
                 >
-                  <Instagram size={18} aria-hidden />
+                  <Instagram size={24} aria-hidden />
                 </a>
                 <a
-                  href="https://wa.me/556999422066"
+                  href="https://api.whatsapp.com/send?phone=556999425251"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp da SEMEC"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-emerald-100 bg-emerald-50 text-emerald-700 shadow-sm transition hover:border-emerald-200 hover:bg-emerald-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-md border border-emerald-100 bg-emerald-50 text-emerald-700 shadow-sm transition hover:border-emerald-200 hover:bg-emerald-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
                 >
-                  <WhatsappIcon size={18} aria-hidden />
+                  <WhatsappIcon size={24} aria-hidden />
                 </a>
-              </div>
-              <a
-                href="https://nfse.portovelho.ro.gov.br/#/login"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-md bg-[color:var(--pv-blue-900)] px-3 text-sm font-semibold text-white transition hover:bg-[color:var(--pv-blue-700)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--pv-blue-700)]"
-              >
-                <User2 size={18} aria-hidden />
-                Acessar o sistema
-              </a>
-            </div>
-
-            <form
-              className="relative flex w-full flex-col gap-2 lg:w-[300px]"
-              onSubmit={handleSearch}
-              aria-label="Barra de busca do portal"
-            >
-              <div className="flex w-full items-center rounded-md border border-slate-200 bg-white shadow-sm focus-within:border-[color:var(--pv-blue-900)] focus-within:ring-2 focus-within:ring-[color:var(--pv-blue-900)]/10">
-                <label htmlFor="site-search" className="sr-only">
-                  O que você procura?
-                </label>
-                <span className="pl-3 text-slate-500">
-                  <Search size={18} aria-hidden />
-                </span>
-                <input
-                  id="site-search"
-                  name="search"
-                  type="search"
-                  minLength={3}
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder="O que você procura?"
-                  className="w-full border-0 bg-transparent px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
-                />
                 <button
-                  type="submit"
-                  className="rounded-r-md bg-[color:var(--pv-yellow-500)] px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400"
+                  id="search-toggle"
+                  onClick={toggleSearch}
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--pv-blue-900)]"
+                  aria-label="Abrir busca"
                 >
-                  Buscar
+                  <Search size={26} aria-hidden />
                 </button>
               </div>
-              {feedback && (
-                <p className="text-xs font-medium text-[color:var(--pv-blue-900)]">
-                  {feedback}
-                </p>
-              )}
-            </form>
+            </div>
+
+            <div className="relative flex w-full flex-col lg:w-75 lg:items-center">
+              <form
+                id="site-search-form"
+                onSubmit={handleSearch}
+                aria-label="Barra de busca do portal"
+                className={`absolute top-3 left-1/2 z-10 w-full -translate-x-1/2 flex-col gap-2 lg:w-75 ${isSearchOpen ? "flex" : "hidden"}`}
+              >
+                <div className="flex w-full items-center rounded-md border border-slate-200 bg-white shadow-lg focus-within:border-(--pv-blue-900) focus-within:ring-2 focus-within:ring-[color:var(--pv-blue-900)]/10">
+                  <label htmlFor="site-search" className="sr-only">
+                    O que você procura?
+                  </label>
+                  <span className="pl-3 text-slate-500">
+                    <Search size={18} aria-hidden />
+                  </span>
+                  <input
+                    ref={searchInputRef}
+                    id="site-search"
+                    name="search"
+                    type="search"
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    placeholder="O que você procura?"
+                    className="w-full border-0 bg-transparent px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="rounded-r-md bg-(--pv-yellow-500) px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-yellow-400"
+                  >
+                    Buscar
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </header>
