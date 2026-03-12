@@ -16,6 +16,12 @@ const contactItems = [
     icon: Mail,
     href: "mailto:gab.semec@portovelho.ro.gov.br",
   },
+  {
+    label: "Dúvidas Tributárias",
+    value: "reformatrib.semec@portovelho.ro.gov.br",
+    icon: Mail,
+    href: "mailto:reformatrib.semec@portovelho.ro.gov.br",
+  },
 ];
 
 const socialLinks = [
@@ -37,6 +43,15 @@ export default function Footer() {
             <Image
               src={SemecLogo}
               alt="Logo oficial da SEMEC Porto Velho"
+              width={100}
+              height={100}
+              className="h-auto w-[80px] drop-shadow-md sm:w-[90px] md:w-[100px]"
+              priority
+            />
+            <div className="h-12 w-px bg-white/30 sm:h-14" aria-hidden="true" />
+            <Image
+              src="/logo-nfse.png"
+              alt="Logo da Nota Fiscal de Serviço Eletrônica"
               width={100}
               height={100}
               className="h-auto w-[80px] drop-shadow-md sm:w-[90px] md:w-[100px]"
@@ -152,7 +167,7 @@ export default function Footer() {
 
               {/* WhatsApp */}
               <a
-                href="https://api.whatsapp.com/send?phone=556999425251"
+                href="https://wa.me/556999422066"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group !mt-3 flex items-center gap-2.5 rounded-lg border border-[#70B643] bg-white p-2.5 transition hover:bg-[#70B643]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#70B643] sm:!mt-4 sm:gap-3 sm:p-3"
@@ -170,7 +185,7 @@ export default function Footer() {
                     WhatsApp
                   </p>
                   <p className="text-[0.7rem] font-medium text-[color:var(--pv-blue-900)] sm:text-xs">
-                    (69) 9 9942-5251
+                    (69) 9 9942-2066
                   </p>
                 </div>
               </a>
