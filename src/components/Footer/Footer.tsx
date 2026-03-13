@@ -48,15 +48,6 @@ export default function Footer() {
               className="h-auto w-[80px] drop-shadow-md sm:w-[90px] md:w-[100px]"
               priority
             />
-            <div className="h-12 w-px bg-white/30 sm:h-14" aria-hidden="true" />
-            <Image
-              src="/logo-nfse.png"
-              alt="Logo da Nota Fiscal de Serviço Eletrônica"
-              width={100}
-              height={100}
-              className="h-auto w-[80px] drop-shadow-md sm:w-[90px] md:w-[100px]"
-              priority
-            />
           </div>
 
           {/* Texto da Secretaria */}
@@ -283,7 +274,7 @@ export default function Footer() {
         aria-hidden="true"
         className="h-7 w-full bg-repeat-x sm:h-9"
         style={{
-          backgroundImage: "url('/footer-banner.png')",
+          backgroundImage: "url('/semec/form-padrao/footer-banner.png')",
           backgroundSize: "328px 48px",
           backgroundPosition: "left center",
         }}
