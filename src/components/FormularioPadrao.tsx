@@ -1163,7 +1163,7 @@ export default function RequerimentoSemfazForm() {
       addMainTitle("REQUERIMENTO PADRÃO");
 
       addWrappedText(
-        "Ilmo. Sr. (a) Secretário (a) Municipal de Economia (SEMFAZ), trata-se de:",
+        "Ilmo. Sr. (a) Secretário (a) Municipal de Economia (SEMEC), trata-se de:",
         {
           fontSize: 10.5,
           lineHeight: 5,
@@ -1235,12 +1235,12 @@ export default function RequerimentoSemfazForm() {
           )}
 
           <h4 className="mb-8 text-center text-xl font-bold text-[#70B643] md:text-2xl">
-            REQUERIMENTO PADRÃO - SEMFAZ
+            REQUERIMENTO PADRÃO - SEMEC
           </h4>
 
           <p className="mb-6 text-sm leading-6 text-gray-700 md:text-base">
-            Ilmo. Sr. (a) Secretário (a) Municipal de Economia (SEMFAZ),
-            trata-se de:
+            Ilmo. Sr. (a) Secretário (a) Municipal de Economia (SEMEC), trata-se
+            de:
           </p>
 
           <SectionCard title="TIPO DE REQUERIMENTO">
