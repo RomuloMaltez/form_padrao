@@ -1,7 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState, type CSSProperties } from "react";
-import html2canvas from "html2canvas";
+import { useMemo, useState, type CSSProperties } from "react";
 import { jsPDF } from "jspdf";
 
 type TipoRequerimento =
@@ -619,210 +618,10 @@ function SelectField({
   );
 }
 
-function getPdfGeneratedDateLabel() {
-  return new Intl.DateTimeFormat("pt-BR").format(new Date());
-}
-
-function PdfPageFrame({ children }: { children: React.ReactNode }) {
-  return (
-    <div data-pdf-page="true" style={pdfPageWrapperStyle}>
-      <div style={pdfPaperStyle}>
-        <div style={pdfMunicipalHeaderStyle}>
-          <div style={pdfMunicipalTitleStyle}>
-            PREFEITURA MUNICIPAL DE PORTO VELHO
-          </div>
-          <div style={pdfMunicipalSubtitleStyle}>
-            SECRETARIA MUNICIPAL DE ECONOMIA
-          </div>
-        </div>
-
-        <div style={pdfTopGreenLineStyle} />
-
-        {children}
-
-        <div style={pdfFooterStyle}>
-          <span>Anexo – Requerimento Padrão</span>
-          <span>
-            Documento gerado eletronicamente em {getPdfGeneratedDateLabel()}
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-const pdfPageWrapperStyle: CSSProperties = {
-  width: "794px",
-  minHeight: "1123px",
-  padding: "24px",
-  boxSizing: "border-box",
-  background: "#efefef",
-  pageBreakAfter: "always",
-  fontFamily: "Arial, Helvetica, sans-serif",
-  color: "#24344c",
-};
-
-const pdfPaperStyle: CSSProperties = {
-  width: "100%",
-  minHeight: "1075px",
-  background: "#ffffff",
-  border: "1px solid #d8dde6",
-  padding: "20px 22px 16px",
-  boxSizing: "border-box",
-};
-
-const pdfMunicipalHeaderStyle: CSSProperties = {
-  textAlign: "center",
-  paddingTop: "2px",
-  paddingBottom: "10px",
-};
-
-const pdfMunicipalTitleStyle: CSSProperties = {
-  color: "#1e3a5f",
-  fontSize: "18px",
-  fontWeight: 700,
-  lineHeight: 1.2,
-};
-
-const pdfMunicipalSubtitleStyle: CSSProperties = {
-  color: "#1e3a5f",
-  fontSize: "13px",
-  fontWeight: 700,
-  lineHeight: 1.2,
-  marginTop: "2px",
-};
-
-const pdfMunicipalSmallTextStyle: CSSProperties = {
-  color: "#6b7280",
-  fontSize: "10px",
-  lineHeight: 1.2,
-  marginTop: "2px",
-};
-
-const pdfTopGreenLineStyle: CSSProperties = {
-  height: "2px",
-  background: "#70B643",
-  marginBottom: "14px",
-};
-
-const pdfHeaderStyle: CSSProperties = {
-  textAlign: "center",
-  padding: "6px 0 10px",
-};
-
-const pdfTitleStyle: CSSProperties = {
-  color: "#70B643",
-  fontSize: "20px",
-  fontWeight: 700,
-  textTransform: "uppercase",
-  lineHeight: 1.25,
-};
-
-const pdfSubTitleStyle: CSSProperties = {
-  color: "#1e3a5f",
-  fontSize: "12px",
-  fontWeight: 700,
-  marginTop: "4px",
-  textTransform: "uppercase",
-};
-
-const pdfHeaderTextStyle: CSSProperties = {
-  margin: "6px 0 0",
-  fontSize: "10.5px",
-  color: "#374151",
-  lineHeight: 1.5,
-};
-
-const pdfSectionTitleStyle: CSSProperties = {
-  background: "#1e3a5f",
-  color: "#ffffff",
-  padding: "8px 10px",
-  fontSize: "11px",
-  fontWeight: 700,
-  textTransform: "uppercase",
-  marginTop: "14px",
-  marginBottom: "10px",
-};
-
-const pdfFieldLineStyle: CSSProperties = {
-  fontSize: "10.5px",
-  lineHeight: 1.55,
-  marginBottom: "6px",
-  color: "#24344c",
-};
-
-const pdfParagraphStyle: CSSProperties = {
-  fontSize: "10.5px",
-  lineHeight: 1.65,
-  textAlign: "justify",
-  color: "#24344c",
-  margin: "0 0 10px",
-};
-
-const pdfTableStyle: CSSProperties = {
-  width: "100%",
-  borderCollapse: "collapse",
-  marginBottom: "10px",
-  fontSize: "10px",
-};
-
-const pdfThStyle: CSSProperties = {
-  border: "1px solid #cfd6e0",
-  background: "#1e3a5f",
-  color: "#ffffff",
-  padding: "7px 8px",
-  textAlign: "left",
-  fontWeight: 700,
-};
-
-const pdfCellStyle: CSSProperties = {
-  border: "1px solid #cfd6e0",
-  padding: "7px 8px",
-  verticalAlign: "top",
-  background: "#ffffff",
-};
-
-const pdfCheckboxLineStyle: CSSProperties = {
-  fontSize: "10.5px",
-  lineHeight: 1.55,
-  marginBottom: "8px",
-  color: "#24344c",
-};
-
-const pdfHrStyle: CSSProperties = {
-  borderTop: "1px solid #d7dde6",
-  margin: "18px 0",
-};
-
-const pdfSignatureAreaStyle: CSSProperties = {
-  marginTop: "96px",
-  textAlign: "center",
-  minHeight: "92px",
-};
-
-const pdfSignatureLineStyle: CSSProperties = {
-  width: "290px",
-  borderTop: "1px solid #1e3a5f",
-  margin: "34px auto 8px",
-};
-
-const pdfFooterStyle: CSSProperties = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  gap: "12px",
-  marginTop: "18px",
-  paddingTop: "8px",
-  borderTop: "1px solid #d8dde6",
-  fontSize: "9px",
-  color: "#6b7280",
-};
-
 /** ======= COMPONENTE FINAL ======= */
 
 export default function RequerimentoSemfazForm() {
   const [form, setForm] = useState<FormState>(initialState);
-  const pdfRef = useRef<HTMLDivElement>(null);
 
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const [invalidFields, setInvalidFields] = useState<string[]>([]);
@@ -965,68 +764,439 @@ export default function RequerimentoSemfazForm() {
   }
 
   async function generatePdf() {
-    if (!validateForm()) return;
-    if (!pdfRef.current || isGeneratingPdf) return;
+    if (!validateForm() || isGeneratingPdf) return;
 
     try {
       setIsGeneratingPdf(true);
 
-      if (document.fonts?.ready) {
-        await document.fonts.ready;
-      }
-
-      await new Promise((resolve) => setTimeout(resolve, 120));
-
-      const pageNodes = Array.from(
-        pdfRef.current.querySelectorAll('[data-pdf-page="true"]'),
-      ) as HTMLElement[];
-
-      if (!pageNodes.length) {
-        throw new Error("Nenhuma página PDF foi encontrada para renderização.");
-      }
-
-      const pdf = new jsPDF({
+      const doc = new jsPDF({
         orientation: "portrait",
         unit: "mm",
         format: "a4",
-        compress: true,
+        compress: false,
       });
 
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const PAGE_W = 210;
+      const PAGE_H = 297;
 
-      for (let index = 0; index < pageNodes.length; index += 1) {
-        const page = pageNodes[index];
+      const PAPER_X = 12;
+      const PAPER_Y = 10;
+      const PAPER_W = 186;
+      const PAPER_H = 277;
 
-        const canvas = await html2canvas(page, {
-          scale: 2,
-          useCORS: true,
-          backgroundColor: "#efefef",
-          logging: false,
-          windowWidth: page.scrollWidth,
-          windowHeight: page.scrollHeight,
+      const CONTENT_X = 22;
+      const CONTENT_W = 166;
+
+      const HEADER_BOTTOM_Y = 34;
+      const FOOTER_LINE_Y = 279;
+      const FOOTER_TEXT_Y = 284;
+      const BODY_START_Y = 42;
+      const BODY_MAX_Y = 268;
+
+      const COLOR_BLUE = [30, 58, 95] as const;
+      const COLOR_GREEN = [112, 182, 67] as const;
+      const COLOR_TEXT = [36, 52, 76] as const;
+      const COLOR_MUTED = [107, 114, 128] as const;
+      const COLOR_BORDER = [216, 221, 230] as const;
+      const COLOR_BG = [239, 239, 239] as const;
+      const BOX_HEADER_H = 7;
+      const BOX_PADDING_X = 3;
+      const BOX_PADDING_TOP = 4;
+      const BOX_PADDING_BOTTOM = 3;
+      const BOX_TEXT_LINE_H = 4.8;
+      const BOX_GAP = 3;
+
+      const BOX_INNER_X = CONTENT_X + BOX_PADDING_X;
+      const BOX_INNER_W = CONTENT_W - BOX_PADDING_X * 2;
+
+      let cursorY = BODY_START_Y;
+
+      const safe = (value: string) => {
+        const trimmed = String(value ?? "").trim();
+        return trimmed ? trimmed : "-";
+      };
+
+      const splitText = (text: string, width: number) =>
+        doc.splitTextToSize(text, width) as string[];
+
+      const drawPageBase = () => {
+        doc.setFillColor(255, 255, 255);
+        doc.rect(0, 0, PAGE_W, PAGE_H, "F");
+
+        doc.setTextColor(...COLOR_BLUE);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(13.5);
+        doc.text("PREFEITURA MUNICIPAL DE PORTO VELHO", PAGE_W / 2, 20, {
+          align: "center",
         });
 
-        const imgData = canvas.toDataURL("image/png", 1.0);
+        doc.setFontSize(10.5);
+        doc.text("SECRETARIA MUNICIPAL DE ECONOMIA", PAGE_W / 2, 25, {
+          align: "center",
+        });
 
-        if (index > 0) {
-          pdf.addPage();
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(8);
+        doc.setTextColor(...COLOR_MUTED);
+        doc.text("Subsecretaria da Receita Municipal", PAGE_W / 2, 29, {
+          align: "center",
+        });
+
+        doc.setDrawColor(...COLOR_GREEN);
+        doc.setLineWidth(0.6);
+        doc.line(
+          CONTENT_X,
+          HEADER_BOTTOM_Y,
+          CONTENT_X + CONTENT_W,
+          HEADER_BOTTOM_Y,
+        );
+
+        doc.setDrawColor(...COLOR_BORDER);
+        doc.setLineWidth(0.2);
+        doc.line(
+          CONTENT_X,
+          FOOTER_LINE_Y,
+          CONTENT_X + CONTENT_W,
+          FOOTER_LINE_Y,
+        );
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(8);
+        doc.setTextColor(...COLOR_MUTED);
+        doc.text("Anexo – Requerimento Padrão", CONTENT_X, FOOTER_TEXT_Y);
+        doc.text(
+          `Documento gerado eletronicamente em ${currentDate}`,
+          CONTENT_X + CONTENT_W,
+          FOOTER_TEXT_Y,
+          { align: "right" },
+        );
+
+        doc.setTextColor(...COLOR_TEXT);
+        cursorY = BODY_START_Y;
+      };
+
+      const newPage = () => {
+        doc.addPage();
+        drawPageBase();
+      };
+
+      const ensureSpace = (needed: number) => {
+        if (cursorY + needed > BODY_MAX_Y) {
+          newPage();
+        }
+      };
+
+      const addMainTitle = (title: string, subtitle?: string) => {
+        ensureSpace(subtitle ? 14 : 9);
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(16);
+        doc.setTextColor(...COLOR_GREEN);
+        doc.text(title, PAGE_W / 2, cursorY, { align: "center" });
+        cursorY += 6;
+
+        if (subtitle) {
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(10.5);
+          doc.setTextColor(...COLOR_TEXT);
+          doc.text(subtitle, PAGE_W / 2, cursorY, { align: "center" });
+          cursorY += 6;
         }
 
-        pdf.addImage(
-          imgData,
-          "PNG",
-          0,
-          0,
-          pdfWidth,
-          pdfHeight,
-          undefined,
-          "FAST",
+        doc.setTextColor(...COLOR_TEXT);
+      };
+
+      const addWrappedText = (
+        text: string,
+        options?: {
+          fontSize?: number;
+          lineHeight?: number;
+          align?: "left" | "center";
+          spacingAfter?: number;
+        },
+      ) => {
+        const fontSize = options?.fontSize ?? 10.5;
+        const lineHeight = options?.lineHeight ?? 5;
+        const align = options?.align ?? "left";
+        const spacingAfter = options?.spacingAfter ?? 2;
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(fontSize);
+        doc.setTextColor(...COLOR_TEXT);
+
+        const lines = splitText(text, align === "center" ? 120 : CONTENT_W);
+
+        for (const line of lines) {
+          ensureSpace(lineHeight);
+          doc.text(line, align === "center" ? PAGE_W / 2 : CONTENT_X, cursorY, {
+            align,
+          });
+          cursorY += lineHeight;
+        }
+
+        cursorY += spacingAfter;
+      };
+
+      const drawSectionContainer = (
+        boxY: number,
+        boxH: number,
+        title: string,
+      ) => {
+        doc.setFillColor(...COLOR_BLUE);
+        doc.rect(CONTENT_X, boxY, CONTENT_W, BOX_HEADER_H, "F");
+
+        doc.setDrawColor(...COLOR_BORDER);
+        doc.setLineWidth(0.35);
+        doc.rect(CONTENT_X, boxY, CONTENT_W, boxH);
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(10);
+        doc.setTextColor(255, 255, 255);
+        doc.text(title, CONTENT_X + 3, boxY + 4.7);
+
+        doc.setTextColor(...COLOR_TEXT);
+      };
+
+      const addBoxedFieldsSection = (
+        title: string,
+        fields: Array<[string, string]>,
+      ) => {
+        const prepared = fields.map(([label, value]) =>
+          splitText(`${label} ${safe(value)}`, BOX_INNER_W),
         );
-      }
+
+        const boxH =
+          BOX_HEADER_H +
+          BOX_PADDING_TOP +
+          BOX_PADDING_BOTTOM +
+          prepared.reduce(
+            (sum, lines) => sum + lines.length * BOX_TEXT_LINE_H + 1,
+            0,
+          );
+
+        ensureSpace(boxH + BOX_GAP);
+
+        const boxY = cursorY;
+        drawSectionContainer(boxY, boxH, title);
+
+        let y = boxY + BOX_HEADER_H + BOX_PADDING_TOP + 1.5;
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(10.5);
+        doc.setTextColor(...COLOR_TEXT);
+
+        for (const lines of prepared) {
+          for (const line of lines) {
+            doc.text(line, BOX_INNER_X, y);
+            y += BOX_TEXT_LINE_H;
+          }
+          y += 1;
+        }
+
+        cursorY = boxY + boxH + BOX_GAP;
+      };
+
+      const addBoxedBulletSection = (
+        title: string,
+        items: string[],
+        continuationTitle?: string,
+      ) => {
+        const prepared = items.map((item) => splitText(item, BOX_INNER_W - 5));
+        let idx = 0;
+        let currentTitle = title;
+
+        while (idx < prepared.length) {
+          let remaining = BODY_MAX_Y - cursorY;
+          let used = BOX_HEADER_H + BOX_PADDING_TOP + BOX_PADDING_BOTTOM;
+          const pageItems: string[][] = [];
+
+          while (idx < prepared.length) {
+            const blockH = prepared[idx].length * BOX_TEXT_LINE_H + 1.2;
+
+            if (pageItems.length === 0 && used + blockH > remaining) {
+              newPage();
+              remaining = BODY_MAX_Y - cursorY;
+              used = BOX_HEADER_H + BOX_PADDING_TOP + BOX_PADDING_BOTTOM;
+              continue;
+            }
+
+            if (pageItems.length > 0 && used + blockH > remaining) {
+              break;
+            }
+
+            pageItems.push(prepared[idx]);
+            used += blockH;
+            idx += 1;
+          }
+
+          const boxY = cursorY;
+          const boxH = used;
+          drawSectionContainer(boxY, boxH, currentTitle);
+
+          let y = boxY + BOX_HEADER_H + BOX_PADDING_TOP + 1.5;
+
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(10);
+          doc.setTextColor(...COLOR_TEXT);
+
+          for (const lines of pageItems) {
+            if (lines.length > 0) {
+              doc.text("•", BOX_INNER_X, y);
+              doc.text(lines[0], BOX_INNER_X + 4, y);
+              y += BOX_TEXT_LINE_H;
+
+              for (let i = 1; i < lines.length; i += 1) {
+                doc.text(lines[i], BOX_INNER_X + 4, y);
+                y += BOX_TEXT_LINE_H;
+              }
+
+              y += 1.2;
+            }
+          }
+
+          cursorY = boxY + boxH + BOX_GAP;
+          currentTitle = continuationTitle ?? `${title} (CONTINUAÇÃO)`;
+        }
+      };
+
+      const addBoxedParagraphSection = (
+        title: string,
+        text: string,
+        continuationTitle?: string,
+      ) => {
+        const lines = splitText(safe(text), BOX_INNER_W);
+        let start = 0;
+        let currentTitle = title;
+
+        while (start < lines.length) {
+          let available = BODY_MAX_Y - cursorY;
+          let maxLines = Math.floor(
+            (available - BOX_HEADER_H - BOX_PADDING_TOP - BOX_PADDING_BOTTOM) /
+              BOX_TEXT_LINE_H,
+          );
+
+          if (maxLines < 2) {
+            newPage();
+            continue;
+          }
+
+          const slice = lines.slice(start, start + maxLines);
+          const boxH =
+            BOX_HEADER_H +
+            BOX_PADDING_TOP +
+            BOX_PADDING_BOTTOM +
+            slice.length * BOX_TEXT_LINE_H;
+
+          const boxY = cursorY;
+          drawSectionContainer(boxY, boxH, currentTitle);
+
+          let y = boxY + BOX_HEADER_H + BOX_PADDING_TOP + 1.5;
+
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(10.5);
+          doc.setTextColor(...COLOR_TEXT);
+
+          for (const line of slice) {
+            doc.text(line, BOX_INNER_X, y);
+            y += BOX_TEXT_LINE_H;
+          }
+
+          cursorY = boxY + boxH + BOX_GAP;
+          start += slice.length;
+          currentTitle = continuationTitle ?? `${title} (CONTINUAÇÃO)`;
+
+          if (start < lines.length) {
+            newPage();
+          }
+        }
+      };
+
+      const addSignatureBlock = () => {
+        const boxH = 46;
+
+        if (cursorY + boxH + BOX_GAP > BODY_MAX_Y) {
+          newPage();
+        }
+
+        const boxY = cursorY;
+        drawSectionContainer(boxY, boxH, "ASSINATURA");
+
+        let y = boxY + BOX_HEADER_H + BOX_PADDING_TOP + 2;
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(10.5);
+        doc.setTextColor(...COLOR_TEXT);
+
+        doc.text("Nestes termos, pede deferimento.", PAGE_W / 2, y, {
+          align: "center",
+        });
+        y += 5.5;
+
+        doc.text(dataExtenso, PAGE_W / 2, y, {
+          align: "center",
+        });
+
+        const lineY = boxY + 31;
+        const lineStartX = PAGE_W / 2 - 40;
+        const lineEndX = PAGE_W / 2 + 40;
+
+        doc.setDrawColor(...COLOR_BLUE);
+        doc.setLineWidth(0.3);
+        doc.line(lineStartX, lineY, lineEndX, lineY);
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(10.5);
+        doc.text("Sujeito passivo/Requerente", PAGE_W / 2, lineY + 6, {
+          align: "center",
+        });
+
+        doc.setFont("helvetica", "normal");
+        doc.text(`CPF nº ${safe(form.cpfAssinatura)}`, PAGE_W / 2, lineY + 11, {
+          align: "center",
+        });
+
+        cursorY = boxY + boxH + BOX_GAP;
+      };
+
+      drawPageBase();
+
+      addMainTitle("REQUERIMENTO PADRÃO");
+
+      addWrappedText(
+        "Ilmo. Sr. (a) Secretário (a) Municipal de Economia (SEMEC), trata-se de:",
+        {
+          fontSize: 10.5,
+          lineHeight: 5,
+          spacingAfter: 2,
+        },
+      );
+
+      addBoxedFieldsSection("TIPO DE REQUERIMENTO", [
+        ["Tipo de requerimento:", form.tipoRequerimento],
+      ]);
+
+      addBoxedFieldsSection("1. IDENTIFICAÇÃO DO SUJEITO PASSIVO/REQUERENTE", [
+        ["Nome/Razão social:", form.nomeRazao],
+        ["CPF/CNPJ:", form.cpfCnpj],
+        ["Telefone/Celular:", form.telefone],
+        ["E-mail:", form.email],
+        ["Endereço de Correspondência:", form.logradouro],
+        ["Nº:", form.numero],
+        ["Bairro:", form.bairro],
+        ["CEP:", form.cep],
+        ["Complemento:", form.complemento],
+      ]);
+
+      addBoxedParagraphSection(
+        "2. O SUJEITO PASSIVO ACIMA IDENTIFICADO VEM REQUERER:",
+        form.objetoPedido,
+        "2. O SUJEITO PASSIVO ACIMA IDENTIFICADO VEM REQUERER: (CONTINUAÇÃO)",
+      );
+
+      addSignatureBlock();
 
       const fileDate = new Date().toISOString().slice(0, 10);
-      pdf.save(`requerimento-semfaz-${fileDate}.pdf`);
+      doc.save(`requerimento-semfaz-${fileDate}.pdf`);
     } catch (error) {
       console.error("Erro ao gerar PDF:", error);
       alert("Não foi possível gerar o PDF. Tente novamente.");
@@ -1065,12 +1235,12 @@ export default function RequerimentoSemfazForm() {
           )}
 
           <h4 className="mb-8 text-center text-xl font-bold text-[#70B643] md:text-2xl">
-            REQUERIMENTO PADRÃO - SEMFAZ
+            REQUERIMENTO PADRÃO - SEMEC
           </h4>
 
           <p className="mb-6 text-sm leading-6 text-gray-700 md:text-base">
-            Ilmo. Sr. (a) Secretário (a) Municipal de Economia (SEMFAZ),
-            trata-se de:
+            Ilmo. Sr. (a) Secretário (a) Municipal de Economia (SEMEC), trata-se
+            de:
           </p>
 
           <SectionCard title="TIPO DE REQUERIMENTO">
@@ -1262,130 +1432,6 @@ export default function RequerimentoSemfazForm() {
           </div>
         </div>
       </section>
-
-      {/* PDF invisível */}
-      <div
-        ref={pdfRef}
-        style={{
-          position: "absolute",
-          left: "-9999px",
-          top: 0,
-          zIndex: -1,
-        }}
-      >
-        {}
-        <PdfPageFrame>
-          <div style={pdfHeaderStyle}>
-            <div style={pdfTitleStyle}>REQUERIMENTO PADRÃO</div>
-            <p style={pdfHeaderTextStyle}>
-              Prefeitura Municipal de Porto Velho - Secretaria Municipal de
-              Economia
-            </p>
-          </div>
-
-          <p style={pdfParagraphStyle}>
-            <strong>
-              Ilmo. Sr. (a) Secretário (a) Municipal de Economia (SEMFAZ),
-              trata-se de:
-            </strong>
-          </p>
-
-          <div style={pdfFieldLineStyle}>
-            <strong>Tipo de requerimento:</strong>{" "}
-            {form.tipoRequerimento || "-"}
-          </div>
-
-          <div style={pdfSectionTitleStyle}>
-            1. IDENTIFICAÇÃO DO SUJEITO PASSIVO/REQUERENTE
-          </div>
-
-          <div style={pdfFieldLineStyle}>
-            <strong>Nome/Razão social:</strong> {form.nomeRazao}
-          </div>
-          <div style={pdfFieldLineStyle}>
-            <strong>CPF/CNPJ:</strong> {form.cpfCnpj}
-          </div>
-          <div style={pdfFieldLineStyle}>
-            <strong>Telefone/Celular:</strong> {form.telefone}
-          </div>
-          <div style={pdfFieldLineStyle}>
-            <strong>E-mail:</strong> {form.email}
-          </div>
-          <div style={pdfFieldLineStyle}>
-            <strong>Endereço de Correspondência:</strong> {form.logradouro}
-          </div>
-          <div style={pdfFieldLineStyle}>
-            <strong>Nº:</strong> {form.numero} &nbsp;&nbsp;
-            <strong>Bairro:</strong> {form.bairro}
-          </div>
-          <div style={pdfFieldLineStyle}>
-            <strong>CEP:</strong> {form.cep} &nbsp;&nbsp;
-            <strong>Complemento:</strong> {form.complemento || "-"}
-          </div>
-
-          <div style={pdfSectionTitleStyle}>
-            2. O SUJEITO PASSIVO ACIMA IDENTIFICADO VEM REQUERER:
-          </div>
-
-          <p style={{ ...pdfParagraphStyle, whiteSpace: "pre-line" }}>
-            {objetoChunks[0] ?? ""}
-          </p>
-        </PdfPageFrame>
-
-        {}
-        {objetoChunks.slice(1).map((chunk, idx) => (
-          <PdfPageFrame key={`pdf-obj-${idx}`}>
-            <div style={pdfHeaderStyle}>
-              <div style={pdfTitleStyle}>REQUERIMENTO</div>
-              <div style={pdfSubTitleStyle}>Continuação do pedido</div>
-              <p style={pdfHeaderTextStyle}>SEMFAZ - Porto Velho</p>
-            </div>
-
-            <div style={pdfSectionTitleStyle}>
-              CONTINUAÇÃO - OBJETO DO PEDIDO
-            </div>
-
-            <p style={{ ...pdfParagraphStyle, whiteSpace: "pre-line" }}>
-              {chunk}
-            </p>
-          </PdfPageFrame>
-        ))}
-
-        {/* Última página: encerramento/assinatura (sempre) */}
-        <PdfPageFrame>
-          <div style={pdfHeaderStyle}>
-            <div style={pdfTitleStyle}>REQUERIMENTO</div>
-            <div style={pdfSubTitleStyle}>Encerramento</div>
-            <p style={pdfHeaderTextStyle}>
-              Prefeitura Municipal de Porto Velho - Secretaria Municipal de
-              Economia
-            </p>
-          </div>
-
-          <p style={{ ...pdfParagraphStyle, textAlign: "center" }}>
-            Nestes termos, pede deferimento.
-          </p>
-
-          <p style={{ ...pdfParagraphStyle, textAlign: "center" }}>
-            {dataExtenso}
-          </p>
-
-          <div style={pdfHrStyle} />
-
-          <div style={pdfSignatureAreaStyle}>
-            <div style={pdfSignatureLineStyle} />
-            <strong>Sujeito passivo/Requerente</strong>
-            <br />
-            CPF nº {form.cpfAssinatura}
-          </div>
-
-          <div style={pdfHrStyle} />
-
-          <p style={{ fontSize: "9pt" }}>
-            Documento gerado eletronicamente em {currentDate}.
-          </p>
-        </PdfPageFrame>
-      </div>
     </>
   );
 }
