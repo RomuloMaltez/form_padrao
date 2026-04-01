@@ -12,12 +12,6 @@ type TipoRequerimento =
   | "Compensação"
   | "Dedução Obra ISS"
   | "Denúncia Espontânea do ISSQN"
-  | "Imunidade Autarquia e Fundação"
-  | "Imunidade Entes Governamentais"
-  | "Imunidade Entidade Educação e Assistência Social"
-  | "Imunidade Entidade Sindical de Trabalhadores"
-  | "Imunidade Partido Político"
-  | "Imunidade Templo de Qualquer Culto"
   | "Inexigibilidade de Licença de Funcionamento"
   | "Isenção IPTU Ex-Soldado da Borracha ou Viúva"
   | "Isenção IPTU Ferroviário EFMM"
@@ -147,82 +141,6 @@ const documentosPorTipo: Record<string, string[]> = {
     "DAM avulso (online) de denúncia espontânea do ISSQN, se houver valor denunciado",
     "Comprovante de pagamento do DAM avulso do ISSQN, se for o caso",
     "Redigir no requerimento ou em documento apartado toda a descrição dos fatos e das infrações que ensejaram a denúncia espontânea, as competências, os prazos, os valores, os cálculos de juros e multas conforme o Art. 87-A da LC 369/09",
-  ],
-  "Imunidade Autarquia e Fundação": [
-    "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
-    "Cópia de RG e CPF, do requerente",
-    "Comprovante de endereço da entidade",
-    "Informar e-mail e telefones de contato",
-    "Taxa de abertura de processo, com o comprovante original",
-    "Lei dispondo sobre a criação do órgão",
-    "Regimento interno",
-    "Decreto ou portaria de nomeação do representante",
-    "Comprovante de inscrição no CNPJ",
-    "Certidão de Inteiro Teor atualizada e dentro do prazo de validade em nome do requerente, ou contrato de compra e venda ou instrumento afim, nos casos em que a Certidão de Inteiro Teor não conste o nome do requerente, mas conste o nome do vendedor, para fins de concessão de ITBI",
-    "Informar o número de inscrição imobiliária do imóvel objeto da imunidade, ou anexar o último carnê do IPTU",
-  ],
-  "Imunidade Entes Governamentais": [
-    "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
-    "Cópia de RG e CPF, do requerente",
-    "Comprovante de endereço",
-    "Informar e-mail e telefones de contato",
-    "Taxa de abertura de processo, com o comprovante original",
-    "Lei dispondo sobre a criação do órgão",
-    "Decreto ou portaria de nomeação do representante",
-    "Comprovante de inscrição no CNPJ",
-    "Certidão de Inteiro Teor atualizada e dentro do prazo de validade em nome do requerente, ou contrato de compra e venda ou instrumento afim, nos casos em que a Certidão de Inteiro Teor não conste o nome do requerente, mas conste o nome do vendedor, para fins de concessão de ITBI",
-    "Informar o número de inscrição imobiliária do imóvel objeto da imunidade, ou anexar o último carnê do IPTU",
-  ],
-  "Imunidade Entidade Educação e Assistência Social": [
-    "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
-    "Cópia de RG e CPF, do requerente",
-    "Comprovante de endereço",
-    "Informar e-mail e telefones de contato",
-    "Taxa de abertura de processo, com o comprovante original",
-    "Atestado de registro no Conselho Nacional de Assistência Social (CNAS) ou certificado de entidade de fins filantrópicos expedido pelo CNAS (no caso de entidade de assistência social)",
-    "Registro no Ministério da Educação ou na Secretaria Estadual da Educação (no caso de entidade de educação)",
-    "Atos constitutivos",
-    "Comprovante de inscrição no CNPJ",
-    "Certidão de Inteiro Teor atualizada e dentro do prazo de validade em nome do requerente, ou contrato de compra e venda ou instrumento afim, nos casos em que a Certidão de Inteiro Teor não conste o nome do requerente, mas conste o nome do vendedor, para fins de concessão de ITBI",
-    "Informar o número de inscrição imobiliária do imóvel objeto da imunidade, ou anexar o último carnê do IPTU",
-  ],
-  "Imunidade Entidade Sindical de Trabalhadores": [
-    "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
-    "Cópia de RG e CPF, do requerente",
-    "Comprovante de endereço",
-    "Informar e-mail e telefones de contato",
-    "Taxa de abertura de processo, com o comprovante original",
-    "Regimento interno",
-    "Comprovante de inscrição no CNPJ",
-    "Certidão de Inteiro Teor atualizada e dentro do prazo de validade em nome do requerente, ou contrato de compra e venda ou instrumento afim, nos casos em que a Certidão de Inteiro Teor não conste o nome do requerente, mas conste o nome do vendedor, para fins de concessão de ITBI",
-    "Informar o número de inscrição imobiliária do imóvel objeto da imunidade, se não houver carnê do IPTU",
-  ],
-  "Imunidade Partido Político": [
-    "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
-    "Cópia de RG e CPF, do requerente",
-    "Comprovante de endereço",
-    "Informar e-mail e telefones de contato",
-    "Taxa de abertura de processo, com o comprovante original",
-    "Lei federal dispondo sobre sua criação",
-    "Registro no Tribunal Superior Eleitoral",
-    "Regimento interno",
-    "Comprovante de inscrição no CNPJ",
-    "Certidão de Inteiro Teor atualizada e dentro do prazo de validade em nome do requerente, ou contrato de compra e venda ou instrumento afim, nos casos em que a Certidão de Inteiro Teor não conste o nome do requerente, mas conste o nome do vendedor, para fins de concessão de ITBI",
-    "Informar o número de inscrição imobiliária do imóvel objeto da imunidade, ou anexar o último carnê do IPTU",
-  ],
-  "Imunidade Templo de Qualquer Culto": [
-    "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
-    "Cópia de RG e CPF do requerente e seu procurador, se for o caso",
-    "Cópia do Comprovante de endereço do requerente",
-    "Confirmar e-mail e telefones de contato no requerimento. Adicionar outros meios de contato no campo observação, se necessário",
-    "Taxa de abertura de processo, com o comprovante de pagamento original",
-    "Estatuto ou Regimento interno",
-    "Ata de Criação da entidade",
-    "Ata da última diretoria eleita",
-    "Comprovante de inscrição no CNPJ",
-    "Ata de Filiação de Unidades Religiosas (somente para situações em que um único CNPJ, esteja sendo utilizado para representar várias unidades pertencentes à mesma organização religiosa)",
-    "Certidão de Inteiro Teor atualizada e dentro do prazo de validade em nome do requerente, ou contrato de compra e venda ou instrumento afim, nos casos em que a Certidão de Inteiro Teor não conste o nome do requerente, mas conste o nome do vendedor, para fins de concessão de ITBI",
-    "Informar o número de inscrição imobiliária do imóvel objeto da imunidade, ou anexar o último carnê do IPTU",
   ],
   "Inexigibilidade de Licença de Funcionamento": [
     "Requerimento padrão, devidamente assinado pelo requerente ou seu procurador",
